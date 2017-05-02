@@ -1,2 +1,2 @@
 # drupal
-Instalación de drupal ver.7
+Instalación de Drupal ver.7 con BitNami para Xampp
