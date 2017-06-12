@@ -1,0 +1,271 @@
+$output= $output . '<br><form id="formConfirmar" action="" method="post" accept-charset="UTF-8">
+		<p>
+		<fieldset form="formConfirma">
+		<legend align="left"><SPAN style="text-align:top">Baja de datos familiares</SPAN></legend>
+        	<br><br><p align="center"> Desea dar de baja los datos familiares del estudiante eliminado<b> ' . $id[1] . '</b></p>
+		<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+		<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+		<input type="hidden" name="id_p" value="' . $id[1] . '">
+		</p></fieldset></p></form>';
+
+//Alta estudiante datos familiares
+<p>
+	<fieldset form="formAltaEstudiante">
+	<legend align="left"><SPAN style="text-align:top">Introducir datos del padre<SPAN></legend>
+        <br><br>
+	<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombP" required>
+	&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosP" required></p>
+	<p>&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacP" required>
+	&emsp;&emsp;&emsp;&emsp;&ensp;DNI:&emsp;<input type="text" style="color:blue" name="dniP" maxlength="9" required></p>
+	<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profP">			
+	&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilP" maxlength="9"></p>			
+	</fieldset>
+	</p>
+	<p>
+	<fieldset form="formAltaEstudiante">
+	<legend align="left"><SPAN style="text-align:top">Introducir datos de la madre<SPAN></legend>
+        <br><br>
+	<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombM" required>
+	&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosM" required></p>
+	<p>&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacM" required>
+	&emsp;&emsp;&emsp;&emsp;&ensp;DNI:&emsp;<input type="text" style="color:blue" name="dniM" maxlength="9" required></p>
+	<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profM">			
+	&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilM" maxlength="9"></p>			
+	</fieldset>
+	</p>
+	<p>&nbsp;<b>Observaciones:</b><textarea name="observaciones" style="color:blue" rows="4" cols="103"></textarea></p>  
+
+
+
+/*****}
+
+elseif (($_POST['nombEst'] == "") && ($_POST['apellidosEst'] == "") && ($_POST['fechaNacEst'] == "") &&($_POST['dniP'] == "") && 
+	($_POST['nombP'] == "") && ($_POST['apellidosP'] == "") && ($_POST['fechaNacP'] == "") && ($_POST['dniM'] == "") && 
+	($_POST['nombM'] == "") &&($_POST['apellidosM'] == "") && ($_POST['fechaNacM'] == "")){
+		$output='<br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No puede dar de alta un Estudiante sin introducir los datos requeridos:</p>
+			<p>Estudiante (NOMBRE, APELLIDOS, FECHA NACIMIENTO)</p>
+			<p>Padre y Madre (DNI, NOMBRE, APELLIDOS, FECHA NACIMIENTO)</p>
+			<p align="center">Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>'; 
+
+} 
+else{
+	$padres[0]=$_POST["nombP"];$padres[1]=$_POST["apellidosP"];$padres[2]=$_POST["fechaNacP"];$padres[3]=$_POST["dniP"];
+	$padres[4]=$_POST["profP"];$padres[5]=$_POST["movilP"];$padres[6]=$_POST["nombM"];$padres[7]=$_POST["apellidosM"];
+	$padres[8]=$_POST["fechaNacM"];$padres[9]=$_POST["dniM"];$padres[10]=$_POST["profM"];$padres[11]=$_POST["movilM"];
+	$padres[12]=$_POST["observaciones"];
+
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[2], $nfecha);
+	$fechaP=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[8], $nfecha);
+	$fechaM=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+
+	$sql="INSERT INTO padres (ID_PADRES, NOMB_PADRE, APEL_PADRE, F_NAC_PADRE, DNI_P, PROF_PADRE, MOVIL_PADRE, NOMB_MADRE, APEL_MADRE, F_NAC_MADRE, DNI_M, PROF_MADRE, MOVIL_MADRE,  OBSERVACIONES) 
+	VALUES (NULL, '$padres[0]', '$padres[1]', '$fechaP', '$padres[3]', '$padres[4]', '$padres[5]', '$padres[6]', '$padres[7]', '$fechaM', '$padres[9]', '$padres[10]', '$padres[11]', '$padres[12]')";
+	if(mysqli_query($conexion, $sql)){
+		$id_padres=mysqli_insert_id($conexion);
+		$output= $output . '<p><b>Padres registrados satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp<b>' . $id_padres . '</b></p> 
+		<p><b>Datos del padre:</b></p>';
+		for ($i=0;$i<6;$i++){
+			if($padres[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $padres[$i] . '</p>';	
+			}
+		}
+		$output= $output . '<p><b>Datos de la madre:</b></p>';
+		for ($i=6;$i<12;$i++){
+			if($padres[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $padres[$i] . '</p>';	
+			}
+		}
+		if ($_POST["observaciones"]<>""){
+			$output= $output . '<p>Observaciones:&nbsp;&nbsp;' . $padres[12] . '</p>';
+		}
+	}
+	$est[0]=$_POST["nombEst"];$est[1]=$_POST["apellidosEst"];$est[2]=$_POST["dirEst"];$est[3]=$_POST["localidadEst"];$est[4]=$_POST["provEst"];
+	$est[5]=$_POST["cpEst"];$est[6]=$_POST["telEst"];$est[7]=$_POST["sexoEst"];$est[8]=$_POST["fechaNacEst"];$est[9]=$_POST["dniEst"];
+
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $est[8], $nfecha);
+	$fecha=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+
+	$sql1="INSERT INTO estudiantes (ID_EST, ID_PADRES, NOMBRE, APELLIDOS, DIRECCION, LOCALIDAD, PROVINCIA, CPOSTAL, TELF, SEXO, FECHA_NACIMIENTO, DNI) 
+	VALUES (NULL, '$id_padres', '$est[0]', '$est[1]', '$est[2]', '$est[3]', '$est[4]', '$est[5]', '$est[6]', '$est[7]', '$fecha', '$est[9]')";
+	if(mysqli_query($conexion, $sql1)){
+		$id_est=mysqli_insert_id($conexion);
+		$output= $output . '<p><b>Estudiante registrado satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp<b>' . $id_est . '</b></p> 
+		<p><b>Datos del estudiante:&nbsp;</b></p>';
+		for ($i=0;$i<10;$i++){
+			if($est[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $est[$i] . '</p>';	
+			}
+		}
+		$output= $output . '<br>
+		<p align="center">Si desea agregar otro estudiante <a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>'; 
+	}*/	
+
+
+/*	$est[0]=$_POST["nombEst"];$est[1]=$_POST["apellidosEst"];$est[2]=$_POST["dirEst"];$est[3]=$_POST["localidadEst"];$est[4]=$_POST["provEst"];
+	$est[5]=$_POST["cpEst"];$est[6]=$_POST["telEst"];$est[7]=$_POST["sexoEst"];$est[8]=$_POST["fechaNacEst"];$est[9]=$_POST["dniEst"];//1951
+	
+	$sql="INSERT INTO padres (ID_PADRES) VALUE (NULL)";
+	mysqli_query($conexion, $sql);
+	$id_p=mysqli_insert_id($conexion);
+	
+	$sql1="INSERT INTO estudiantes (ID_EST, ID_PADRES, NOMBRE, APELLIDOS, DIRECCION, LOCALIDAD, PROVINCIA, CPOSTAL, TELF, SEXO, FECHA_NACIMIENTO, DNI) 
+	VALUES (NULL, '$id_p', '$est[0]', '$est[1]', '$est[2]', '$est[3]', '$est[4]', '$est[5]', '$est[6]', '$est[7]', '$est[8]', '$est[9]')";
+	mysqli_query($conexion, $sql1);	
+*/
+
+
+
+/*}elseif ($_POST["altaEst"]=='0'){
+		$padres[0]=$_POST["nombP"];$padres[1]=$_POST["apellidosP"];$padres[2]=$_POST["fechaNacP"];$padres[3]=$_POST["dniP"];
+		$padres[4]=$_POST["profP"];$padres[5]=$_POST["movilP"];$padres[6]=$_POST["nombM"];$padres[7]=$_POST["apellidosM"];
+		$padres[8]=$_POST["fechaNacM"];$padres[9]=$_POST["dniM"];$padres[10]=$_POST["profM"];$padres[11]=$_POST["movilM"];
+		$padres[12]=$_POST["observaciones"];$id_P=$_POST["idP"];
+		
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[2], $nfecha);
+		$fechaP=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[8], $nfecha);
+		$fechaM=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];//2054
+		
+		$est[0]=$_POST["nombEst"];$est[1]=$_POST["apellidosEst"];$est[2]=$_POST["dirEst"];$est[3]=$_POST["localidadEst"];$est[4]=$_POST["provEst"];
+		$est[5]=$_POST["cpEst"];$est[6]=$_POST["telEst"];$est[7]=$_POST["sexoEst"];$est[8]=$_POST["fechaNacEst"];$est[9]=$_POST["dniEst"];
+
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $est[8], $nfecha);
+		$fechaE=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+
+		$sqlP="UPDATE padres SET NOMB_PADRE='$padres[0]', APEL_PADRE='$padres[1]', F_NAC_PADRE='$fechaP', DNI_P='$padres[3]', PROF_PADRE='$padres[4]', MOVIL_PADRE='$padres[5]', NOMB_MADRE= '$padres[6]', APEL_MADRE='$padres[7]', F_NAC_MADRE='$fechaM', DNI_M='$padres[9]', PROF_MADRE='$padres[10]', MOVIL_MADRE='$padres[11]', OBSERVACIONES='$padres[12]' WHERE ID_PADRES='$id_P'";
+				
+		$sqlE="INSERT INTO estudiantes (ID_EST, ID_PADRES, NOMBRE, APELLIDOS, DIRECCION, LOCALIDAD, PROVINCIA, CPOSTAL, TELF, SEXO, FECHA_NACIMIENTO, DNI) 
+		VALUES (NULL, '$id_P', '$est[0]', '$est[1]', '$est[2]', '$est[3]', '$est[4]', '$est[5]', '$est[6]', '$est[7]', '$fechaE', '$est[9]')";
+
+		if((mysqli_query($conexion, $sqlP)) && (mysqli_query($conexion, $sqlE))){
+			$id_est=mysqli_insert_id($conexion);
+			$output= '<p><b>Estudiante registrado satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp<b>' . $id_est . '</b></p> 
+			<p><b><ins>Datos del estudiante:</ins></b></p>';
+			for ($i=0;$i<10;$i++){
+				if($est[$i]<>""){
+					$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $est[$i] . '</p>';	
+				}
+			}			
+			$output= $output . '<p><b>Padres registrados satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp<b>' . $id_P . '</b></p> 
+			<p><b><u>Datos del padre:</u></b></p>';
+			for ($i=0;$i<6;$i++){
+				if($padres[$i]<>""){
+					$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $padres[$i] . '</p>';	
+				}
+			}
+			$output= $output . '<p><b><u>Datos de la madre:</u></b></p>';
+			for ($i=6;$i<12;$i++){
+				if($padres[$i]<>""){
+					$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;' . $padres[$i] . '</p>';	
+				}
+			}
+			if ($_POST["observaciones"]<>""){
+				$output= $output . '<p>Observaciones:&nbsp;&nbsp;' . $padres[12] . '</p>';
+			}
+			$output= $output . '<br>
+			<p align="center">Si desea agregar otro estudiante <a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>'; 
+		}else{
+
+			$output='<br><br><p><font color="red"><b>Atenci&oacute;n</b></font></p>
+				<p>Error al dar de alta los datos del estudiante: ' . $est[0] . ' ' . $est[1] . '</p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+
+	}*/
+
+/************************************************
+Confirmar baja 
+************************************************/
+
+elseif(isset($_POST["Eliminar"])){
+	$est=$_POST["Estudiante"];
+	if($_POST["datos"]=="Totales"){
+		$datos=$_POST["datos"] . ": Datos de estudiante y familiares";
+	}else{
+		$datos=$_POST["datos"] . ": Datos de estudiante";
+	}
+	
+	$output='<form id="formConfirmar" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmar">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja al estudiante<b>&nbsp;' . $est . '</b></p>
+	<p align="center">A eliminar con los siguiente datos<b>&nbsp;' . $datos . '</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="est" value="' . $est . '"><input type="hidden" name="datos" value="' . $_POST["datos"] . '">
+	</p></fieldset></p></form>';
+}else{
+	$est=$_POST["est"];
+	$datos=$_POST["datos"];
+	if(isset($_POST["Aceptar"])){
+		$nombre=substr($est, (strpos($est, ",")+1));
+		$long=strlen($nombre);
+		$nombre=ltrim($nombre);
+		$apellidos=substr($est, 0, -($long+1));
+		$apellidos=ltrim($apellidos);
+
+		$sql="SELECT * FROM estudiantes WHERE apellidos='$apellidos' AND nombre='$nombre'";
+		$result=mysqli_query($conexion, $sql);
+		$regEst=mysqli_fetch_array($result);
+		
+		if($datos=="Parciales"){
+			$sql1="SELECT id_padres FROM estudiantes WHERE id_padres='$regEst[1]'";
+			$result1=mysqli_query($conexion, $sql1);
+			$total_filas=mysqli_num_rows($result1);
+			if($total_filas==1){
+				$output='<br><p align="center"><font color="red"><b>Atenci&oacute;n:</b>&nbsp;El estudiante seleccionado no tiene hermanos/as en este centro.</font></p>
+				<p align="center">Debe seleccionar la opci&oacute;n de elimniar estudiante con datos <b>TOTALES</b></p>
+				<p align="center"> Para volver atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				$sql2="DELETE FROM estudiantes WHERE ID_EST='$regEst[0]'";
+				if(mysqli_query($conexion, $sql2)){//2114
+					$output='<p><b>El estudiante seleccionado se ha borrado satisfactoriamente</b>.</p>
+					<p>Identificador del registro: <b>' . $regEst[0] . '</b></p> 
+					<p>Nombre:<b>' . $regEst[2] . '</b></p>
+					<p>Apellidos del docente:<b>' . $regEst[3] . '</b></p><br><br>
+					<p align="center">Si desea eliminar otro estudiante&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';		
+				}
+				else{
+					$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $regEst[2] . '<b>&nbsp;y apellido:&nbsp;<b>' . $regEst[3] . '</b></p>';
+					$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+				}
+			}
+		}
+		if($datos=="Totales"){
+			$sql1="SELECT id_padres FROM estudiantes WHERE id_padres='$regEst[1]'";
+			$result1=mysqli_query($conexion, $sql1);
+			$total_filas=mysqli_num_rows($result1);
+
+			if($total_filas > 1){
+				$output='<br><p align="cener"><font color="red"><b>Atenci&oacute;n:</b>&nbsp;El estudiante seleccionado tiene hermanos/as en este centro.</font></p>
+				<p align="center">Debe seleccionar la opci&oacute;n de elimniar con datos PARCIALES</p>
+				<p align="center"> Para volver atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				//$output='<p>'. $regEst[1] . ' y ' . $regEst[0];
+				$sql2="DELETE FROM estudiantes WHERE ID_EST='$regEst[0]'"; $result2=mysqli_query($conexion, $sql2);
+				$sql1="DELETE FROM padres WHERE ID_PADRES='$regEst[1]'"; $result1=mysqli_query($conexion, $sql1);
+				if(($result1)&&($result2)){
+					$output=$output . '<p><b>El estudiante seleccionado se ha eliminado satisfactoriamente con los datos familiares</b></p>
+					<p>Identificador del registro: <b>' . $regEst[0] . '</b></p> 
+					<p>Identificador familiar:<b>' . $regEst[1] . '</b></p>
+					<p>Nombre:<b>' . $regEst[2] . '</b></p>
+					<p>Apellidos del docente:<b>' . $regEst[3] . '</b></p><br><br>
+					<p align="center">Si desea eliminar otro estudiante&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+				}
+				else{
+					$output= $output . '<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $regEst[2] . '<b>&nbsp;y apellido:&nbsp;<b>' . $regEst[3] . '</b></p>';//2148
+					$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+				}
+			}	
+		}
+	}else{
+		$output='<br><br><p align="center"><b>Operaci&oacute;n de eliminar estudiante&nbsp;<font color="red">' . $est . '</font>&nbsp;cancelada</b></font>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Estudiante"&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>'; 
+	}
+
+}

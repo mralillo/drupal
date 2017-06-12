@@ -1,0 +1,145 @@
+<?php
+
+
+/**
+ * Implementation hook_menu().
+ */
+ function colegio_menu() {
+ $items=array();
+
+ $items['colegio/inicia'] = array(
+ 'title' => 'Inicia',
+ 'page callback' => 'overview',
+ 'page arguments' => array('Estudiantes'),
+/* 'file' => 'menufun_greeting.inc',*/
+ 'access callback' => TRUE,
+ 'type' => MENU_NORMAL_ITEM,
+ 'weight' => -1,
+ );
+ $items['colegio/inicia/estudiantes'] = array(
+ 'title' => 'Estdiantes',
+ 'access arguments' => array('Estudiantes'),
+ 'type' => MENU_DEFAULT_LOCAL_TASK,
+ 'weight' => 0,
+ );
+ $items['colegio/inicia/docentes'] = array(
+ 'title' => 'Docentes',
+ 'access arguments' => array('Docentes'),
+ 'page callback' => 'agregar',
+ 'type' => MENU_LOCAL_TASK,
+ 'weight' => 1,
+ );
+ $items['colegio/inicia/materias'] = array(
+ 'title' => 'Materias',
+ 'access arguments' => array('Materias'),
+ 'page callback' => 'agregar',
+ 'type' => MENU_LOCAL_TASK,
+ 'weight' => 2,
+ );
+ $items['colegio/inicia/dptos'] = array(
+ 'title' => 'Departamentos',
+ 'access arguments' => array('Departamentos'),
+ 'page callback' => 'agregar',
+ 'type' => MENU_LOCAL_TASK,
+ 'weight' => 3,
+
+ );
+ $items['colegio/inicia/estudiantes/alta_estudiante'] = array(
+ 'title' => 'Alta Estudiante',
+ 'access arguments' => array('Estudiantes'),
+ 'page callback' => 'listar',
+ 'page arguments' => array(2), // Pass 'fruity'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+ $items['colegio/inicia/estudiantes/baja_estudiante'] = array(
+ 'title' => 'Baja Estudiante',
+ 'access arguments' => array('Estudiantes'),
+ 'page callback' => 'baja_estud',
+ 'page arguments' => array(2), // Pass 'candy'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+$items['colegio/inicia/estudiantes/modificar_estudiante'] = array(
+ 'title' => 'Modificar Estudiante',
+ 'access arguments' => array('Estudiantes'),
+ 'page callback' => 'listar',
+ 'page arguments' => array(2), // Pass 'candy'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+
+
+$items['colegio/inicia/dptos/alta_dpto'] = array(
+ 'title' => 'Alta Departamento',
+ 'access arguments' => array('Departamentos'),
+ 'page callback' => 'a_departamento',
+ 'page arguments' => array(2), // Pass 'fruity'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+ $items['colegio/inicia/dptos/baja_dpto'] = array(
+ 'title' => 'Baja Departamento',
+ 'access arguments' => array('Estudiantes'),
+ 'page callback' => 'b_departamento',
+ 'page arguments' => array(2), // Pass 'candy'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+$items['colegio/inicia/dptos/modificar_dpto'] = array(
+ 'title' => 'Modificar Departamento',
+ 'access arguments' => array('Estudiantes'),
+ 'page callback' => 'm_departamento',
+ 'page arguments' => array(2), // Pass 'candy'.
+ 'type' => MENU_LOCAL_TASK,
+ );
+ return $items;
+ }
+
+/**
+ * Page callback
+ */
+function menufun_greeting($first_name = '', $last_name = ''){
+ return t('Hello @first_name @last_name', array('@first_name' => $first_name, '@last_name' => $last_name));
+}
+
+function overview() {
+ $output = t('The following flavors are available...');
+ // ... more code here
+ return $output;
+ }
+ 
+ function agregar() {
+
+if (!$_POST){
+$output='<form id="formAlta" action="http://localhost/drupal/colegio/inicia/dptos" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formAlta">
+	<legend align="left"><SPAN style="text-align:top">Introducir el nuevo departamento</SPAN></legend>
+       <br><br>
+	<p><SPAN style="text-align:center">   Nombre:   <input type="text" name="nombDpto" size="70"></SPAN></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">  <input type="reset" value="Borrar" style="font-weight:bold; color:black">  <input type="button" style="font-wight:bold" value="Salir">
+	</p>
+	</form>';
+}
+else{
+
+$output = "Departamento nuevo: " . $_POST["nombDpto"];
+}
+ //return t('A handy form to add flavors might go here...');
+return $output;
+ }
+ 
+ function listar($type) {
+ return t('List @type flavors', array('@type' => $type));
+ }
+function baja_estud() {
+ return ('hola');
+ }
+
+function a_departamento() {
+ return ('alta dpto');
+ }
+function b_departamento() {
+ return ('baja departameno');
+ }
+function m_departamento() {
+ return ('modificar departamento');
+ }

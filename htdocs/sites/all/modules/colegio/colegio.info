@@ -1,0 +1,9 @@
+name=colegio
+description=Modulo para gestion de colegio
+core=7.x
+package= Administrar colegio
+php = 5.6.8
+version=7.x-1.0-dev
+/*dependencies[]=ctools*/
+
+configure = admin/config/content/colegio

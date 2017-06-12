@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Archivo para empezar a programar con Drupal
+ */
+
+function primermodulo_permission(){
+return array('Administer primermodulo' => array(
+		'title'=> t('Administer primermodulo'),
+		'description'=> t('prueba'),
+		'restrict access'=>FALSE,
+		),
+	);	
+
+}
+
+
+/**
+ * Implementa hook_menu().
+ */
+function primermodulo_menu() {
+  $items['primermodulo/hola_mundo'] = array(
+    'title' => 'Saludos Usuario',
+    'page callback' => 'primermodulo_hola_mundo',
+    'access arguments' => array ('Administer primermodulo'), /*TRUE*/
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Callback que implementa la página: primermodulo/hola_mundo.
+ */
+function primermodulo_hola_mundo() {
+	$hoy=localtime(time(),1);
+	$hora=$hoy["tm_hour"];
+
+GLOBAL $user;
+
+	if (($hora >=7) && ($hora < 14)){
+		return '<p class="saludo"><em>Buenos d&iacute;as </em>' . $user->name . '</p><p>alta de un nuevo departamento<p>';
+	}
+	elseif (($hora >=14) && ($hora < 20)){
+		return '<p class="saludo"><em>Buenos tardes </em>' . $user->name . '</p>';
+	}
+	else {
+		return '<p class="saludo"><em>Buenos noches </em>' . $user->name . '</p>';	
+	}		
+  	
+
+
+}
+
+
+

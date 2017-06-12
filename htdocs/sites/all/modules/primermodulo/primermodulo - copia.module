@@ -1,0 +1,78 @@
+<?php
+/**
+ * @file
+ * Archivo para empezar a programar con Drupal
+ */
+
+function primermodulo_permission(){
+return array('Administer primermodulo' => array(
+		'title'=> t('Administer primermodulo'),
+		'description'=> t('prueba'),
+		'restrict access'=>FALSE,
+		),
+	);	
+
+}
+
+
+/**
+ * Implementa hook_menu().
+ */
+function primermodulo_menu() {
+  $items['primermodulo/hola_mundo'] = array(
+    'title' => 'Saludos',
+    'page callback' => 'primermodulo_hola_mundo',
+    'access arguments' => array ('Administer primermodulo'), /*TRUE*/
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+
+/**
+ * Callback que implementa la página: primermodulo/hola-mundo.
+ */
+function primermodulo_hola_mundo() {
+	/*$hoy=localtime(time(),1);
+	$hora=$hoy["tm_hour"];
+
+	if (($hora >=7) && ($hora < 14)){
+		return '<p class="saludo"><em>Buenos días</em></p>';
+	}
+	elseif (($hora >=14) && ($hora < 20)){
+		return '<p class="saludo"><em>Buenos tardes</em></p>';
+	}
+	else {
+		return '<p class="saludo"><em>Buenos noches</em></p>';	*/
+	}	
+
+  	return '<p class="saludo"><em>Hola Mundo</em></p>';
+}
+
+/** Implements hook_permission() 
+
+**/
+
+
+/**function primermodulo_permission() {
+  
+return array(
+    
+'administer languages' => array(
+      
+'title' => t('Administer languages'),
+    
+),
+    
+'translate interface' => array(
+      
+	'title' => t('Translate interface texts'),
+      
+	'restrict access' => TRUE,
+    ),
+  );
+
+}
+
+
+**/

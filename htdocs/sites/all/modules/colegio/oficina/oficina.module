@@ -1,0 +1,3115 @@
+<?php
+
+
+/**
+ * Implementation hook_menu().
+ */
+ function oficina_menu() {
+/*variables*/
+ $items=array();
+
+ $items['oficina/cursos_oficiales'] = array(	/************** Cursos Académicos **************/
+ 'title' => 'CURSOS OFICIALES',
+ 'page callback' => 'listar_unidades',
+ 'page arguments' => array('Unidades'),
+ 'access callback' => TRUE,
+ 'type' => MENU_NORMAL_ITEM,
+ 'weight' => -1,
+ );
+ $items['oficina/cursos_oficiales/unidades'] = array(
+ 'title' => 'Unidades',
+ 'access arguments' => array('Unidades'),
+ 'type' => MENU_DEFAULT_LOCAL_TASK,
+ 'weight' => 0,
+ );
+ $items['oficina/cursos_oficiales/cursos'] = array(
+ 'title' => 'Cursos',
+ 'access arguments' => array('Cursos'),
+ 'page callback' => 'listar_cursos',
+ 'type' => MENU_LOCAL_TASK,
+ 'weight' => 1,
+ ); 
+$items['oficina/cursos_oficiales/ciclos'] = array(
+ 'title' => 'Ciclos',
+ 'access arguments' => array('Ciclos'),
+ 'page callback' => 'listar_ciclos',
+ 'type' => MENU_LOCAL_TASK,
+ 'weight' => 2,
+ );
+
+/******** Cursos ********/
+
+$items['oficina/cursos_oficiales/cursos/listar_cursos'] = array(
+ 'title' => 'Listar Cursos',
+ 'access arguments' => array('Cursos'),
+ 'page callback' => 'listar_cursos',
+ 'page arguments' => array(2),
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 0,
+ ); 
+$items['oficina/cursos_oficiales/cursos/alta_curso'] = array(
+ 'title' => 'Alta Curso',
+ 'access arguments' => array('Cursos'),
+ 'page callback' => 'alta_curso',//50
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 2,	
+ );
+ $items['oficina/cursos_oficiales/cursos/baja_curso'] = array(
+ 'title' => 'Baja Curso',
+ 'access arguments' => array('Cursos'),
+ 'page callback' => 'baja_curso',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 3,
+ );
+$items['oficina/cursos_oficiales/cursos/modificar_curso'] = array(
+ 'title' => 'Modificar Curso',
+ 'access arguments' => array('Cursos'),
+ 'page callback' => 'modificar_curso',
+ 'page arguments' => array(2),
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 1,
+ );
+
+/******** Ciclos ********/
+
+$items['oficina/cursos_oficiales/ciclos/listar_ciclos'] = array(
+ 'title' => 'Listar Ciclos',
+ 'access arguments' => array('Ciclos'),
+ 'page callback' => 'listar_ciclos',
+ 'page arguments' => array(2),
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 0,
+ ); 
+$items['oficina/cursos_oficiales/ciclos/alta_ciclo'] = array(
+ 'title' => 'Alta Ciclo',
+ 'access arguments' => array('ciclos'),
+ 'page callback' => 'alta_ciclo',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 2,
+ );
+ $items['oficina/cursos_oficiales/ciclos/baja_ciclo'] = array(
+ 'title' => 'Baja Ciclo',
+ 'access arguments' => array('Ciclos'),
+ 'page callback' => 'baja_ciclo',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 3,
+ );
+$items['oficina/cursos_oficiales/ciclos/modificar_ciclo'] = array(
+ 'title' => 'Modificar Ciclo',
+ 'access arguments' => array('Ciclos'),
+ 'page callback' => 'modificar_ciclo',//100
+ 'page arguments' => array(2),
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 1,
+ );
+
+/******** Unidades ********/
+
+$items['oficina/cursos_oficiales/unidades/listar_unidades'] = array(
+ 'title' => 'Listar Unidades',
+ 'access arguments' => array('Unidades'),
+ 'page callback' => 'listar_unidades',
+ 'page arguments' => array(2),
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 0,
+ ); 
+$items['oficina/cursos_oficiales/unidades/alta_unidad'] = array(
+ 'title' => 'Alta Unidad',
+ 'access arguments' => array('Unidades'),
+ 'page callback' => 'alta_unidad',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 2,
+ );
+ $items['oficina/cursos_oficiales/unidades/baja_unidad'] = array(
+ 'title' => 'Baja Unidad',
+ 'access arguments' => array('Unidades'),
+ 'page callback' => 'baja_unidad',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 3,
+ );
+$items['oficina/cursos_oficiales/unidades/modificar_unidad'] = array(
+ 'title' => 'Modificar Unidad',
+ 'access arguments' => array('Unidades'),
+ 'page callback' => 'modificar_unidad',
+ 'page arguments' => array(2), 
+ 'type' => MENU_LOCAL_TASK,
+ 'weight'=> 1,
+ );
+
+$items['oficina/departamentos']=array(		/*************** Departamentos *****************/
+	'title' => 'DEPARTAMENTOS',
+	'access arguments'=> array('Listar Departamentos'),
+	'page callback' => 'listar_departamentos',
+	'access callback'=> TRUE,
+	'type'=> MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);
+
+$items['oficina/departamentos/listar_departamentos']=array(
+	'title' => 'Listar Departamentos',
+	'access arguments'=> array('Listar Departamentos'),//150
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/departamentos/alta_departamento'] = array(
+ 	'title' => 'Alta Departamento',
+ 	'access arguments' => array('Alta Departamento'),
+ 	'page callback' => 'alta_departamento',
+ 	'type' => MENU_LOCAL_TASK,
+	'weight'=> 1,
+ 	); 
+$items['oficina/departamentos/baja_departamento']=array(
+	'title' => 'Baja Departamento',
+	'access arguments'=> array('Baja Departamento'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_departamento',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 2,
+	);
+$items['oficina/departamentos/modificar_departamento']=array(
+	'title' => 'Modificar Departamento',
+	'access arguments'=> array('Modificar Departamento'),
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_departamento',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);
+
+$items['oficina/docentes']=array(	/*************** Docentes *****************/
+	'title' => 'DOCENTES',
+	'access arguments'=> array('Listar Docentes'),
+	'page callback' => 'listar_docentes',
+	'access callback'=> TRUE,
+	'type'=> MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);
+$items['oficina/docentes/listar_docentes']=array(
+	'title' => 'Listar Docentes',
+	'access arguments'=> array('Listar Docentes'),
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/docentes/alta_docente']=array(
+	'title' => 'Alta Docente',
+	'access arguments'=> array('Alta Docente'),
+	'access callback'=> TRUE,
+	'page callback' => 'alta_docente',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 1,
+	);//200
+$items['oficina/docentes/baja_docente']=array(
+	'title' => 'Baja Docente',
+	'access arguments'=> array('Baja Docente'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_docente',
+	'type'=> MENU_LOCAL_TASK,
+ 	'weight'=> 2,
+	);
+$items['oficina/docentes/modificar_docente']=array(
+	'title' => 'Modificar Docente',
+	'access arguments'=> array('Modificar Docente'),
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_docente',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);	
+
+$items['oficina/estudiantes']=array(		/****************** Estudiantes ******************/
+	'title' => 'ESTUDIANTES',
+	'access arguments'=> array('Listar estudiantes'),
+	'page callback' => 'listar_estudiantes',
+	'access callback'=> TRUE,
+	'type'=> MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);
+$items['oficina/estudiantes/listar_estudiantes']=array(
+	'title' => 'Listar Estudiantes',
+	'access arguments'=> array('Listar estudiantes'),
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/estudiantes/alta_estudiante']=array(
+	'title' => 'Alta Estudiante',
+	'access arguments'=> array('Alta Estudiante'),
+	'access callback'=> TRUE,
+	'page callback' => 'alta_estudiante',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 1,
+	);
+$items['oficina/estudiantes/baja_estudiante']=array(
+	'title' => 'Baja Estudiante',
+	'access arguments'=> array('Baja Estudiante'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_estudiante',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 2,
+	);
+$items['oficina/estudiantes/modificar_estudiante']=array(
+	'title' => 'Modificar Estudiante',
+	'access arguments'=> array('Modificar Estudiante'),//250
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_estudiante',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);	
+
+$items['oficina/historial_de_expedientes']=array(	/***************** Expedientes  *************/
+	'title' => 'HISTORIAL DE EXPEDIENTES',
+	'access arguments' => array('Historial de Expedientes'),
+	'page callback' => 'listar_expedientes',   //527
+	'access callback'=> TRUE,
+	'type' => MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);
+$items['oficina/historial_de_expedientes/listar_expedientes']=array(
+	'title' => 'Listar Historial de Expedientes',
+	'access arguments'=> array('Listar Historial de Expedientes'),
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/historial_de_expedientes/alta_expediente']=array(
+	'title' => 'Alta Historial de Expediente',
+	'access arguments'=> array('Alta Historial de Expediente'),
+	'access callback'=> TRUE,
+	'page callback' => 'alta_expediente',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 1,
+	);
+$items['oficina/historial_de_expedientes/baja_expediente']=array(
+	'title' => 'Baja Historial de Expediente',
+	'access arguments'=> array('Baja Historial de Expediente'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_expediente',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 2,
+	);
+$items['oficina/historial_de_expedientes/modificar_expediente']=array(
+	'title' => 'Modificar Historial de Expediente',
+	'access arguments'=> array('Modificar Historial de Expediente'),
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_expediente',//300
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);
+
+$items['oficina/materias']=array(	/**************** Materias *****************/
+	'title' => 'MATERIAS',
+	'access arguments'=> array('Listar Materias'),
+	'page callback' => 'listar_materias',
+	'access callback'=> TRUE,
+	'type'=> MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);	
+$items['oficina/materias/listar_materias']=array(
+	'title' => 'Listar Materias',
+	'access arguments'=> array('Listar Materias'),
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/materias/alta_materia']=array(
+	'title' => 'Alta Materia',
+	'access arguments'=> array('Alta Materia'),
+	'access callback'=> TRUE,
+	'page callback' => 'alta_materia',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 1,
+	);
+$items['oficina/materias/baja_materia']=array(
+	'title' => 'Baja Materia',
+	'access arguments'=> array('Baja Materia'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_materia',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 2,
+	);
+$items['oficina/materias/modificar_materia']=array(
+	'title' => 'Modificar Materia',
+	'access arguments'=> array('Modificar Materia'),
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_materia',//300
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);
+$items['oficina/registro_de_estudiantes']=array(	/************** Registro (matrículas) *************/
+	'title' => 'REGISTRO DE ESTUDIANTES',
+	'access arguments'=> array('Listar Registros'),
+	'page callback' => 'alta_materia',
+	'access callback'=> TRUE,
+	'type'=> MENU_NORMAL_ITEM,
+	'weight'=> -1,
+	);	
+$items['oficina/registro_de_estudiantes/listar_registros']=array(
+	'title' => 'Listar Registros',
+	'access arguments'=> array('Listar Registros'),
+	'type'=> MENU_DEFAULT_LOCAL_TASK,
+	'weight'=> 0,
+	);
+$items['oficina/registro_de_estudiantes/alta_registro']=array(
+	'title' => 'Alta Registro',
+	'access arguments'=> array('Alta Registro'),
+	'access callback'=> TRUE,
+	'page callback' => 'alta_registro',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 1,
+	);
+$items['oficina/registro_de_estudiantes/baja_registro']=array(
+	'title' => 'Baja Registro',
+	'access arguments'=> array('Baja Registro'),
+	'access callback'=> TRUE,
+	'page callback' => 'baja_materia',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 3,
+	);
+$items['oficina/registro_de_estudiantes/modificar_registro']=array(
+	'title' => 'Modificar Registro',
+	'access arguments'=> array('Modificar Registro'),
+	'access callback'=> TRUE,
+	'page callback' => 'modificar_materia',
+	'type'=> MENU_LOCAL_TASK,
+	'weight'=> 2,
+	);
+
+ return $items;
+}
+
+/**
+ * Page callback
+**/
+/*function menufun_greeting($first_name = '', $last_name = ''){
+ return t('Hello @first_name @last_name', array('@first_name' => $first_name, '@last_name' => $last_name));
+}*/ 
+//351
+
+function overvie() {
+ $output = t('The following flavors are available...');
+ // ... more code here
+ return $output;
+ }
+ 
+function agregare() {
+
+if (!$_POST){
+$output='<form id="formAlta" action="http://localhost/drupal/colegio/inicia/dptos" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formAlta">
+	<legend align="left"><SPAN style="text-align:top">Introducir el nuevo departamento</SPAN></legend>
+       <br><br>
+	<p><SPAN style="text-align:center">   Nombre:   <input type="text" name="nombDpto"></SPAN></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">  <input type="reset" value="Borrar" style="font-weight:bold; color:black">  <input type="button" style="font-wight:bold" value="Salir">
+	</p>
+	</form>';
+}
+else{
+
+$output = "Departamento nuevo: " . $_POST["nombDpto"];
+}
+ //return t('A handy form to add flavors might go here...');
+return $output;
+ }
+ 
+ function listare($type) {
+ return t('List @type flavors', array('@type' => $type));
+ }
+function baja_est() {
+ return ('hola');
+ }
+
+/*********************
+		**** Base de Datos Externa *****
+						*******************************/
+function bdexterna(){
+$conn=mysqli_connect("localhost", "colegio", "colegio", "colegio");
+	if (!$conn){
+		die("Conexión ha fallado:" . mysqli_connect_error());
+	}
+mysqli_select_db($conn, "colegio");	
+return($conn);
+}
+
+/**********
+		*********************** Cursos oficiales ***********************
+***********/
+
+/******** Ciclos **********/
+
+function listar_ciclos(){
+$output="";
+$tamano_pagina="2";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM ciclos";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM ciclos LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de los Ciclos del centro</font></b></p>';
+$output=$output . '<table border="2"><tr><th><font size="3">Identificador</font></th><th><font size="3">Nombre Ciclo</font></th></th><th><font size="3">N&uacute;mero Convocatorias</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr><td><font color="blue" size="2">'. $row["ID_CICLO"] . '</font></td><td><font color="blue" size="2">' . $row["NOMBRE"] . '</font></td><td><font color="blue" size="2">' . $row["NUM_CONV"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+mysqli_close($conexion);
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/listar_ciclos?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+return $output;
+} 	/** end listar_ciclos **/
+
+
+function alta_ciclo(){
+$output="";//400
+
+if (!$_POST){
+	$output='<form id="formAltaCiclo" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formAltaCiclo">
+	<legend align="left"><SPAN style="text-align:top">Introducir un nuevo ciclo</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Nombre de Ciclo:&nbsp;<input type="text" style="color:blue" name="nombCiclo" required autofocus></SPAN></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;N&uacute;mero de Convocatorias:&nbsp;<input type="number" style="color:blue" name="numConv" min="1" max="3" required></SPAN></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+ }elseif ($_POST["nombCiclo"] == ""){
+		$output='<br><b>Atenci&oacute;n</b><br><br><p>No puede dar de alta un Ciclo sin nombre</p><p>Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/alta_ciclo">pulse aqu&iacute;</a></p>'; 
+
+	}
+else{
+	$conexion=bdexterna();
+
+	$nombre=$_POST["nombCiclo"];
+	$Conv=$_POST["numConv"];
+	
+	mysqli_select_db($conexion, "colegio");
+	$sql="INSERT INTO ciclos (ID_CICLO, NOMBRE, NUM_CONV) VALUES (NULL, '$nombre', '$Conv')";
+	
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<p><b>Nuevo ciclo registrado satisfactoriamente con:</b></p>
+		<p>Identificador&nbsp;<b>' . $ant_id . '</b></p> 
+		<p>Nombre&nbsp; <b>' . $nombre . '</b></p>
+		<p>N&uacute;mero de convocatorias&nbsp; <b>' . $Conv . '</b></p>
+		<br><br>
+		<p align="center">Si desea agregar otro ciclo <a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/alta_ciclo">pulse aqu&iacute;</a></p>'; 
+	}
+	
+	mysqli_close($conexion);
+}
+
+return $output;
+
+} 	/** end alta_ciclo **/
+
+
+function baja_ciclo(){
+$output="";
+$conexion=bdexterna();	
+
+if (!$_POST){
+	$output='<form id="formBajaCiclo" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaCiclo">
+	<legend align="left"><SPAN style="text-align:top">Eliminar un ciclo</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&emsp;&nbsp;Seleccionar un ciclo:&nbsp;<p align="center"><select name="nombCiclo" size="2">';
+	
+	$sql="SELECT nombre FROM ciclos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}//501
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</p></select></fieldset>
+	</p>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){
+	$output='<form id="formConfirmarCiclo" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarCiclo">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja el ciclo<b>&nbsp;"' . $_POST["nombCiclo"] . '"</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="ciclo" value="' . $_POST["nombCiclo"] . '">
+	</p></fieldset></p></form>';
+}
+else{
+	$nombre=$_POST["ciclo"];
+	if(isset($_POST["Aceptar"])){
+		$sql="SELECT id_ciclo,nombre FROM ciclos WHERE nombre='$nombre'";
+		$row=mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+		//$sql="DELETE FROM ciclos WHERE NOMBRE='$nombre'";
+		//if(mysqli_query($conexion, $sql)){	
+			$output= '<p><b>El ciclo seleccionado se ha borrado satisfactoriamente con:</b></p>
+			<p>Identificador&nbsp;<b>' . $row["id_ciclo"] . '</b></p> 
+			<p>Nombre&nbsp;<b>' . $row["nombre"] . '</b></p><br><br>';
+			$output=$output . '<p align="center">Si desea eliminar otro ciclo&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/baja_ciclo">pulse aqu&iacute;</a></p>';		
+		//}
+		//else{
+		//	$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+		//	$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		//}
+	}else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar ciclo con el nombre<br>
+		<font color="red">"' . $nombre . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Ciclo"&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/baja_ciclo">pulse aqu&iacute;</a></p>'; 
+	}
+
+}
+mysqli_close($conexion);
+return $output;
+
+} 	/** end baja_ciclo **/
+
+	
+function modificar_ciclo(){
+$output="";
+$error=false;
+
+$conexion=bdexterna();
+if (!$_POST){
+	$output='<form id="formModCiclo" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModCiclo">
+	<legend align="left"><SPAN style="text-align:top">Cambiar un ciclo</SPAN></legend>
+        <br><br>
+	<SPAN style="text-align:center">&emsp;&nbsp;Seleccionar un ciclo:&nbsp;<p align="center"><select name="nombCiclo" size="5" required>';
+	
+	$sql="SELECT nombre, num_conv FROM ciclos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+			//$id=$row["id_ciclo"];$conv=$row["num_conv"];
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p></SPAN>
+	<p>&emsp;&nbsp;Introducir datos a modificar:</p>
+	<p>&emsp;&nbsp;Nombre:&nbsp;<input type="text" style="color:blue" name="nuevoNomb"></p>
+	<p>&emsp;&nbsp;Convocatorias:&nbsp;<input type="number" style="color:blue" name="nuevoConv" placeholder="N&uacute;merico entre 1 y 3"></p>';
+	$output=$output . '</fieldset>
+	</p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+
+} 
+else{
+	$nombre=$_POST["nombCiclo"];
+	$nombnuevo=$_POST["nuevoNomb"];
+	$convnuevo=$_POST["nuevoConv"];
+	
+	//mysqli_select_db($conexion, "colegio");
+	$sql="SELECT ID_CICLO FROM ciclos WHERE NOMBRE='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$id=mysqli_fetch_array($result);
+	$num=$id[0];
+
+	if (($nombnuevo == "") && ($convnuevo == "")){
+		$output='<br><br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No ha introducido ning&uacute;n dato para actualizar el registro seleccionado:&nbsp;<b>' . $nombre . '</b></p>&nbsp;';
+		$output=$output . '<br><p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+	} 
+	else{
+		$output= '<br><br><p><b>Actualizaci&oacute;n del registro seleccionado.</b></p>'; 
+		if ($nombnuevo == ""){
+			if (($convnuevo < "1") || ($convnuevo >="3")){
+				$output= $output . '<p>El rango n&uacute;merico introducido para el campo convocatorias no es correcto</p>';
+				$output= $output . '<br><p align="center">Para volver a modificarlo,&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+			}else{
+				$sql="UPDATE ciclos SET NUM_CONV='$convnuevo' WHERE ID_CICLO= '$id[0]'";
+				if(mysqli_query($conexion, $sql)){	
+					$output=$output . '<p>El registro seleccionado, se ha actualizado con el n&uacute;mero de convocatorias igual a:&nbsp;<b>' . $convnuevo . '</b></p>';
+					$output=$output . '<br><p align="center">Si desea modificar otro departamento&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+				}
+				else{
+					$error=true;
+				}
+			}
+		}elseif ($convnuevo == ""){
+			$sql="UPDATE ciclos SET NOMBRE='$nombnuevo' WHERE ID_CICLO= '$id[0]'";
+			if(mysqli_query($conexion, $sql)){	
+				$output=$output . '<p>El registro seleccionado, se ha actualizado con el nuevo nombre:&nbsp;<b>' . $nombnuevo . '</b></p>';
+				$output=$output . '<br><p align="center">Si desea modificar otro departamento&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				$error=true;
+			}
+		}else{
+			if (($convnuevo >= "1") || ($convnuevo <="3")){
+				$output= $output . '<p>El rango n&uacute;merico introducido para el campo convocatorias no es correcto</p>';
+				$output= $output . '<br><p align="center">Para volver a modificarlo,&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+			}else{
+				$sql="UPDATE ciclos SET NOMBRE='$nombnuevo', NUM_CONV='$nombnuevo' WHERE ID_CICLO= '$id[0]'";
+				if(mysqli_query($conexion, $sql)){	
+					$output=$output . '<p>El registro seleccionado, se ha actualizado con:</p>'; 
+					$output=$output . '<p>Nuevo nombre&nbsp;<b>' . $nombnuevo .'</b></p><p>N&uacute;mero de convocatorias&nbsp;<b>' . $convnuevo . '</b></p>';
+					$output=$output . '<br><p align="center">Si desea modificar otro departamento&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/ciclos/modificar_ciclo">pulse aqu&iacute;</a></p>';
+				}
+				else{
+					$error=true;
+				}
+			}
+		}
+	}
+	if ($error){
+		$output='<p><b>Se ha producido un Error al actualizar el registro con el nombre:&nbsp;' . $nombre . '</b></p>';
+		$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+	}
+
+} 
+mysqli_close($conexion);
+return $output;
+
+} 	/** end modificar_ciclo **/
+
+
+/******** Cursos **********/
+
+function listar_cursos(){
+$output="";
+$tamano_pagina="10";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM cursos";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM cursos LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de los Cursos del centro</font></b></p>';
+$output=$output . '<table border="2"><tr><th><font size="3">Identificador</font></th><th><font size="3">Nombre Curso</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr><td><font color="blue" size="2">'. $row["ID_CURSO"] . '</font></td><td><font color="blue" size="2">' . $row["NOMBRE"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+mysqli_close($conexion);
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/listar_cursos?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+return $output;
+} 	/** end listar_cursos **/
+
+
+function alta_curso(){
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formAltaCurso" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formAltaCurso">
+	<legend align="left"><SPAN style="text-align:top">Introducir un nuevo curso</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Nombre de Curso:&nbsp;<input type="text" style="color:blue" name="nombCurso" required autofocus></SPAN></p>
+	&emsp;&nbsp;Asignar un Ciclo:&nbsp;<p align="center"><select name="Ciclo" required size="4">';
+	$sql="SELECT nombre FROM ciclos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output=$output . '</select></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+ }elseif ($_POST["nombCurso"] == ""){
+		$output='<br><b>Atenci&oacute;n</b><br><br><p>No puede dar de alta un Curso sin nombre</p><p>Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/alta_curso">pulse aqu&iacute;</a></p>'; 
+
+}
+else{
+	$nombre=$_POST["nombCurso"];
+	$nombCiclo=$_POST["Ciclo"];
+	$sql="SELECT ID_CICLO FROM ciclos WHERE NOMBRE='$nombCiclo'";
+	$result=mysqli_query($conexion, $sql);
+	$idCiclo=mysqli_fetch_array($result);
+	$sql="INSERT INTO cursos (ID_CURSO, NOMBRE, ID_CICLO) VALUES (NULL, '$nombre', '$idCiclo[0]')";
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<p><b>Nuevo curso registrado satisfactoriamente con:</b></p>
+		<p>Identificador&nbsp;<b>' . $ant_id . '</b></p> 
+		<p>Nombre&nbsp; <b>' . $nombre . '</b></p>
+		<p>Ciclo del curso&nbsp; <b>' . $nombCiclo . '</b></p>
+		<br><br>
+		<p align="center">Si desea agregar otro curso <a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/alta_curso">pulse aqu&iacute;</a></p>'; 
+	}	
+}
+mysqli_close($conexion);
+return $output;
+
+} 	/** end alta_curso **/
+
+
+function baja_curso(){
+$output="";
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formBajaCurso" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaCurso">
+	<legend align="left"><SPAN style="text-align:top">Eliminar un ciclo</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&emsp;&nbsp;Seleccionar un curso:&nbsp;<p align="center"><select name="nombCurso" size="5">';
+	
+	$sql="SELECT nombre FROM cursos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p></SPAN></p></fieldset>
+	</p>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){
+	$output='<form id="formConfirmarCurso" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarCurso">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja el curso<b>&nbsp;"' . $_POST["nombCurso"] . '"</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="curso" value="' . $_POST["nombCurso"] . '">
+	</p></fieldset></p></form>';
+}
+else{
+	$nombre=$_POST["curso"];
+	if(isset($_POST["Aceptar"])){
+		$sql="SELECT id_curso,nombre FROM cursos WHERE nombre='$nombre'";
+		$row=mysqli_fetch_array(mysqli_query($conexion, $sql));
+		//$sql="DELETE FROM cursos WHERE nombre='$nombre'";
+		//if(mysqli_query($conexion, $sql)){	
+			$output= '<p><b>El curso seleccionado se ha borrado satisfactoriamente con:</b></p>
+			<p>Identificador&nbsp;<b>' . $row["id_curso"] . '</b></p> 
+			<p>Nombre&nbsp;<b>' . $row["nombre"] . '</b></p><br><br>';
+			$output=$output . '<p align="center">Si desea eliminar otro curso&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/baja_curso">pulse aqu&iacute;</a></p>';		
+		//}
+		//else{
+		//	$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+		//	$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		//}
+	}else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar curso con el nombre<br>
+		<font color="red">"' . $nombre . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Curso"&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/baja_curso">pulse aqu&iacute;</a></p>'; 
+	}
+
+
+}
+mysqli_close($conexion);
+return $output;
+
+} 	/** end baja_curso **/
+
+	
+function modificar_curso(){
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formModCurso" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModCurso">
+	<legend align="left"><SPAN style="text-align:top">Cambiar un ciclo</SPAN></legend>
+        <br><br>
+	&emsp;&nbsp;Seleccionar un Curso:&nbsp;<p align="center"><select name="nombCurso" size="5" required>';
+	
+	$sql="SELECT nombre FROM cursos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p>
+	<p>&emsp;&nbsp;Indicar el nuevo nombre del curso:&nbsp;<input type="text" style="color:blue" name="nuevoNomb" required></p>
+	</fieldset>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+
+} 
+else{
+	$nombre=$_POST["nombCurso"];
+	$nombnuevo=$_POST["nuevoNomb"];
+	//mysqli_select_db($conexion, "colegio");
+	$sql="SELECT ID_CURSO FROM cursos WHERE NOMBRE='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$id=mysqli_fetch_array($result);
+	$num=$id[0];
+
+	if ($nombnuevo == ""){
+		$output='<br><br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No ha introducido ning&uacute;n dato para actualizar el registro seleccionado:&nbsp;<b>' . $nombre . '</b></p>&nbsp;';
+		$output=$output . '<br><p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/modificar_curso">pulse aqu&iacute;</a></p>';
+	} 
+	else{
+		$output= '<br><br><p><b>Actualizaci&oacute;n del registro seleccionado.</b></p>'; 
+		$sql="UPDATE cursos SET NOMBRE='$nombnuevo' WHERE ID_CURSO= '$id[0]'";
+			if(mysqli_query($conexion, $sql)){	
+				$output=$output . '<p>El registro seleccionado, se ha actualizado con el nuevo nombre:&nbsp;<b>' . $nombnuevo . '</b></p>';
+				$output=$output . '<br><p align="center">Si desea modificar otro Curso&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/cursos/modificar_curso">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				$output='<p><b>Se ha producido un Error al actualizar el registro con el nombre:&nbsp;' . $nombre . '</b></p>';
+				$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+			}
+	}
+} 
+mysqli_close($conexion);
+return $output;
+
+} 	/** end modificar_curso **/
+
+
+
+/******** Unidades **********/
+
+function listar_unidades(){
+$output="";
+$tamano_pagina="4";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT nombre FROM grupos_a";
+$result=mysqli_query($conexion, $sql); 
+$total_filas=mysqli_num_rows($result);  //936
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM grupos_a LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de las Unidades del centro</font></b></p>';
+$output=$output . '<table border="2"><tr><th><font size="3">Identificador</font></th><th><font size="3">Nombre Unidad</font></th><th><font size="3">Aula</font></th><th><font size="3">Dia de Tutoria</font></th><th><font size="3">Hora de Tutoria</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr><td><font color="blue" size="2">'. $row["ID_GRUPOSA"] . '</font></td><td><font color="blue" size="2">' . $row["NOMBRE"] . '</font></td><td><font color="blue" size="2">' . $row["AULA"] . '</font></td><td><font color="blue" size="2">' . $row["DIA_TUTORIA"] . '</font></td><td><font color="blue" size="2">' . $row["HORA_TUTORIA"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+/*****Paginar******/
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/listar_unidades?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+if (!$_POST){
+
+	$output=$output . '<br><br><form id="formBuscarUnidades" action="" method="post" accept-charset=UTF-8" size="100%">
+	<p><fieldset form="formBuscarUnidades"><br><legend align="left"><SPAN style="text-align:top">Busqueda de informaci&oacute;n de Unidades del Centro</SPAN></legend><br>
+	<p align="center">Seleccionar el nombre completo de la Unidad:</p>
+	<p align="center"><select required name="nombunidad" size="6">';
+	$sql="SELECT nombre, id_gruposa FROM grupos_a";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){ //971
+		while($row=mysqli_fetch_assoc($result)){
+			$output=$output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		$output=$output . '<option></option>';
+	} 
+	$output=$output . '</select></p>
+	<br>
+	<p align="center"><input type="submit" value="Buscar Unidad" style="font-weight:bold; color:black">&emsp;&emsp;
+	<input type="reset" value="Limpiar" style="font-weight:bold; color:black"></p>
+	</fielset></form>';
+}
+else{
+	$unidad=$_POST["nombunidad"];
+	$repetidor='0';
+	$sql="SELECT id_curso, nombre, aula, dia_tutoria, hora_tutoria FROM grupos_a WHERE nombre='$unidad'";
+	$result=mysqli_query($conexion, $sql);
+	$filas=mysqli_num_rows($result);
+	if (mysqli_num_rows($result) > 0){
+			$row=mysqli_fetch_assoc($result);
+			$id=$row["id_curso"];
+			$sql1="SELECT nombre FROM cursos WHERE id_curso='$id'";  //996
+			$result1=mysqli_query($conexion, $sql1);
+			if (mysqli_num_rows($result1)>0){
+				$row1=mysqli_fetch_assoc($result1);
+			}
+			$output='<p align="center"><b><font size="4">Datos de la Unidad seleccionada</font></b></p>
+			<table border="2"><tr><th><font size="3">Curso</font></th><th><font size="3">Nombre Unidad</font>
+			</th><th><font size="3">Aula</font></th><th><font size="3">Dia de Tutoria</font></th><th><font size="3">Hora de Tutoria</font></th></tr>
+			<tr><td><font color="blue" size="2">' . $row1["nombre"] . '</font></td><td><font color="blue" size="2">' . $row["nombre"] . '</font></td>
+			<td><font color="blue" size="2">' . $row["aula"] . '</font></td><td><font color="blue" size="2">' . $row["dia_tutoria"] . '</font></td>
+			<td><font color="blue" size="2">' . $row["hora_tutoria"] . '</font></td></tr>
+			</table><br>';
+		
+	}		
+	$output=$output . '<br><br><p>Para volver hacia atr&aacute;s&nbsp;
+	<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/listar_unidades">pulse aqu&iacute;</a></p>';
+}
+
+mysqli_close($conexion);
+return $output;
+} 	/** end listar_unidades **/
+
+
+function alta_unidad(){
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formAltaUnidad" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formAltaUnidad">
+	<legend align="left"><SPAN style="text-align:top">Introducir datos de Unidad</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Nombre de Unidad:&nbsp;<input type="text" style="color:blue" name="nombUnidad" required autofocus></SPAN></p>
+	&emsp;&nbsp;Asignar un Curso:&nbsp;<p align="center"><select name="Curso" required size="4">';
+	$sql="SELECT nombre FROM cursos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output=$output . '</select></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Aula aignada:&nbsp;<input type="text" style="color:blue" name="Aula" required></SPAN></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;D&iacute;a de Tutor&iacute;a:&nbsp;<input type="text" style="color:blue" name="diaTutoria" required></SPAN></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Hora de Tutor&iacute;a:&nbsp;<input type="time" style="color:blue" name="horaTutoria" required></SPAN></p>	
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+}elseif ($_POST["nombUnidad"] == ""){
+		$output='<br><b>Atenci&oacute;n</b><br><br><p>No puede dar de alta una Unidad sin nombre</p><p>Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/alta_unidad">pulse aqu&iacute;</a></p>'; 
+}
+else{
+	$nombre=$_POST["nombUnidad"];
+	$nombCurso=$_POST["Curso"];
+	$aula=$_POST["Aula"];
+	$diat=$_POST["diaTutoria"];
+	$horat=$_POST["horaTutoria"];
+	$sql="SELECT ID_CURSO FROM cursos WHERE NOMBRE='$nombCurso'";
+	$result=mysqli_query($conexion, $sql);
+	$idCurso=mysqli_fetch_array($result);
+
+	$sql="INSERT INTO grupos_a (ID_GRUPOSA, ID_CURSO, NOMBRE, AULA, DIA_TUTORIA, HORA_TUTORIA) VALUES (NULL, '$idCurso[0]', '$nombre', '$aula', '$diat', '$horat')";
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<br><p><b>Nueva unidad registrada satisfactoriamente con:</b></p>
+		<p>Identificador&nbsp;<b>' . $ant_id . '</b></p> 
+		<p>Unidad&nbsp; <b>' . $nombre . '</b></p>
+		<p>Curso de la Unidad&nbsp; <b>' . $nombCurso . '</b></p>
+		<p>Aula de la unidad&nbsp; <b>' . $aula . '</b></p>
+		<p>D&iacute;a de la semana de tutor&iacute;a&nbsp; <b>' . $diat . '</b></p>
+		<p>Hora de tutor&iacute;a&nbsp;<b>' . $horat . '</b></p>
+		<br><br>
+		<p align="center">Si desea agregar otra unidad <a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/alta_unidad">pulse aqu&iacute;</a></p>'; 
+	}		
+}
+mysqli_close($conexion);
+return $output;
+
+} 	/** end alta_unidad **/
+
+function baja_unidad(){
+$output="";
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formBajaUnidad" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaUnidad">
+	<legend align="left"><SPAN style="text-align:top">Eliminar una Unidad</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&emsp;&nbsp;Seleccionar una unidad:&nbsp;<p align="center"><select name="nombUnidad" size="4">';
+	$sql="SELECT nombre FROM grupos_a";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+	  	$output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p></p></fieldset>	
+	</p>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p></form>'; 
+}
+elseif(isset($_POST["Eliminar"])){
+	$output='<form id="formConfirmarUnidad" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarUnidad">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja la Unidad<b>&nbsp;"' . $_POST["nombUnidad"] . '"</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="unidad" value="' . $_POST["nombUnidad"] . '">
+	</p></fieldset></p></form>';
+}
+else{
+	$nombre=$_POST["unidad"];
+	if(isset($_POST["Aceptar"])){	
+		$sql="SELECT id_gruposa,nombre FROM grupos_a WHERE nombre='$nombre'";
+		$row=mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+		$sql="DELETE FROM grupos_a WHERE nombre='$nombre'";
+		if(mysqli_query($conexion, $sql)){	
+			$output= '<p><b>La unidad seleccionada se ha borrado satisfactoriamente con:</b></p>
+			<p>Identificador&nbsp;<b>' .$row["id_gruposa"] . '</b></p> 
+			<p>Nombre&nbsp;<b>' . $row["nombre"] . '</b></p><br><br>';
+			$output=$output . '<p align="center">Si desea eliminar otra unidad&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/baja_unidad">pulse aqu&iacute;</a></p>';		
+		}
+		else{
+			$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+	else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar unidad con el nombre<br>
+		<font color="red">"' . $nombre . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Unidad"&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/baja_unidad">pulse aqu&iacute;</a></p>'; 
+	}
+}
+mysqli_close($conexion);
+return $output;
+
+}        /** end baja_unidad  **/
+
+
+function modificar_unidad(){
+$output="";
+$error=false;
+
+$conexion=bdexterna();//1193
+
+if (!$_POST){
+	$output='<form id="formModUnidad" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModUnidad">
+	<legend align="left"><SPAN style="text-align:top">Cambiar una unidad</SPAN></legend>
+        <br><br>';
+	//1194
+	$output= $output . '<SPAN style="text-align:center">&emsp;&nbsp;Seleccionar una unidad:&nbsp;<p><select name="nombUnidad" size="5" required>';
+	$sql="SELECT nombre FROM grupos_a";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+	 	 $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p></SPAN>
+	<p>&emsp;&nbsp;Introducir datos a modificar:</p>
+	<p>&emsp;&nbsp;Nombre:&nbsp;<input type="text" style="color:blue" name="nuevoNomb"></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Aula aignada:&nbsp;<input type="text" style="color:blue" name="Aula"></SPAN></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;D&iacute;a de Tutor&iacute;a:&nbsp;<input type="text" style="color:blue" name="diaTutoria"></SPAN></p>
+	<p><SPAN style="text-align:center">&emsp;&nbsp;Hora de Tutor&iacute;a:&nbsp;<input type="time" style="color:blue" name="horaTutoria"></SPAN></p>
+	</fieldset></p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">    
+	</form>';	
+}
+else{
+	$nombre=$_POST["nombUnidad"];
+	$nombnuevo=$_POST["nuevoNomb"];
+	$aula=$_POST["Aula"];
+	$diat=$_POST["diaTutoria"];
+	$horat=$_POST["horaTutoria"];
+	$sql="SELECT ID_GRUPOSA FROM grupos_a WHERE NOMBRE='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$id=mysqli_fetch_array($result);
+	$num=$id[0];
+	if (($nombnuevo == "") && ($aula == "") && ($diat == "") && ($horat == "")){
+		$output='<br><br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No ha introducido ning&uacute;n dato para actualizar el registro seleccionado:&nbsp;<b>' . $nombre . '</b></p>&nbsp;';
+		$output=$output . '<br><p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/modificar_unidad">pulse aqu&iacute;</a></p>';
+	} 
+	else{
+		$output= '<br><br><p><b>Actualizaci&oacute;n del registro seleccionado.</b></p>'; 
+		if ($nombnuevo <> ""){
+			$sql="UPDATE grupos_a SET NOMBRE= '$nombnuevo' WHERE ID_GRUPOSA= '$id[0]'";
+			if(mysqli_query($conexion, $sql)){
+				$output=$output . '<p>Nombre actualizado:&nbsp;<b>' . $nombnuevo . '</b></p>';
+			} 
+			else{
+				$error=true;	 
+			}
+		} 
+		if ($aula <> ""){
+			$sql="UPDATE grupos_a SET AULA= '$aula' WHERE ID_GRUPOSA= '$id[0]'";
+			if(mysqli_query($conexion, $sql)){
+				$output= $output . '<p>Aula actualizada::&nbsp;<b>' . $aula . '</b></p>';
+			} 
+			else{
+				$error=true;	 
+			}
+		} 
+		if ($diat <> ""){	
+			$sql="UPDATE grupos_a SET DIA_TUTORIA= '$diat' WHERE ID_GRUPOSA= '$id[0]'";//1300
+			if(mysqli_query($conexion, $sql)){
+				$output=$output . '<p>D&iacute;a de tutor&iacute;a actualizado:&nbsp;<b>' . $diat . '</b></p>';
+			} 
+			else{
+				$error=true;	 
+			}
+		} 
+		if ($horat <> ""){	
+			$sql="UPDATE grupos_a SET HORA_TUTORIA= '$horat' WHERE ID_GRUPOSA= '$id[0]'";
+			if(mysqli_query($conexion, $sql)){
+				$output=$output . '<p>Hora de tutor&iacute;a actualizado:&nbsp;<b>' . $horat . '</b></p>';
+			} 
+			else{
+				$error=true;	 
+			}
+		}
+		if ($error){
+			$output='<p><b>Se ha producido un Error al actualizar el registro con el nombre:&nbsp;' . $nombre . '</b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+		else{
+			$output=$output . '<br><p align="center">Si desea modificar otra Uniad&nbsp;<a href="http://localhost/drupal/oficina/cursos_oficiales/unidades/modificar_unidad">pulse aqu&iacute;</a></p>';
+		}
+	}
+} 
+mysqli_close($conexion);
+return $output;
+
+}	/** end modificar_unidad **/
+
+/**********
+		*********************** Departamentos ***********************
+***********/
+
+function listar_departamentos() {
+$output="";
+$tamano_pagina="15";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM departamentos";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM departamentos LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de los Departamentos activos en el centro</font></b></p>';
+$output=$output . '<table border="2"><tr><th><font size="2">Identificador</font></th><th><font size="2">Nombre Departamento</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr><td><font color="blue" size="2">'. $row["ID_DPTO"] . '</font></td><td><font color="blue" size="2">' . $row["NOMBRE"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+mysqli_close($conexion);
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/departamentos/listar_departamentos?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+return $output;
+}  /** end listar_departamentos **/
+
+function alta_departamento() {
+$output="";
+
+if (!$_POST){
+$output='<form id="formAltaDpto" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formAltaDpto">
+	<legend align="left"><SPAN style="text-align:top">Introducir un nuevo departamento</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre Departamento:&nbsp;<input type="text" style="color:blue" name="nombDpto" required autofocus></SPAN></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+ }
+elseif ($_POST["nombDpto"] == ""){
+		$output='<br><b>Atenci&oacute;n</b><br><br><p>No puede dar de alta un Departamento sin nombre</p><p>Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/departamentos/alta_departamento">pulse aqu&iacute;</a></p>'; 
+
+} 
+else{
+	$conexion=bdexterna();
+	$nombre=$_POST["nombDpto"];
+	mysqli_select_db($conexion, "colegio");
+	$sql="INSERT INTO departamentos (ID_DPTO, NOMBRE) VALUES (NULL, '$nombre')";
+	
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<p><b>Nuevo departamento registrado satisfactoriamente</b>.</p><p>Identificador de nuevo registro: <b>' . $ant_id . '</b></p> 
+		<p>Nombre del nuevo registro: <b>' . $nombre . '</b></p><br><br>
+		<p align="center">Si desea agregar otro departamento <a href="http://localhost/drupal/oficina/departamentos/alta_departamento">pulse aqu&iacute;</a></p>'; 
+	}
+	
+	mysqli_close($conexion);
+}
+
+return $output;
+} /** end alta_departamento **/
+
+
+
+function baja_departamento() {
+$output="";
+$conexion=bdexterna();	
+
+if (!$_POST){
+	$output='<form id="formBajaDpto" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaDpto">
+	<legend align="left"><SPAN style="text-align:top">Eliminar un departamento</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar un Departamento:&nbsp;<p align="center"><select name="nombDpto" size="5" required>';
+	
+	$sql="SELECT nombre FROM departamentos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</p></select></fieldset>
+	</p>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){	
+	$output='<form id="formConfirmarDpto" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarDpto">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja el departamento con el nombre<b>&nbsp;"' . $_POST["nombDpto"] . '"</b></p>
+	
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="dpto" value="' . $_POST["nombDpto"] . '">
+	</p></fieldset></p></form>';
+}
+
+else{
+	$nombre=$_POST["dpto"];
+	if(isset($_POST["Aceptar"])){
+		//mysqli_select_db($conexion, "colegio");
+		$sql="SELECT id_dpto,nombre FROM departamentos WHERE nombre='$nombre'";
+		$row=mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+		//$sql="DELETE FROM departamentos WHERE nombre='$nombre'";
+		//if(mysqli_query($conexion, $sql)){	
+			$output= '<p><b>El departamento seleccionado se ha borrado satisfactoriamente</b>.</p>
+			<p>Identificador del registro: <b>' .$row["id_dpto"] . '</b></p> 
+			<p>Nombre del registro: <b>' . $row["nombre"] . '</b></p><br><br>';
+			$output=$output . '<p align="center">Si desea eliminar otro departamento&nbsp;<a href="http://localhost/drupal/oficina/departamentos/baja_departamento">pulse aqu&iacute;</a></p>';		
+		//}
+		//else{
+		//	$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+		//	$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		//}
+	}
+	else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar departamento con el nombre<br>
+		<font color="red">"' . $nombre . '"</font>
+		<br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Departamento"&nbsp;<a href="http://localhost/drupal/oficina/departamentos/baja_departamento">pulse aqu&iacute;</a></p>'; 
+	}
+}
+mysqli_close($conexion);
+return $output;
+ }  /** end baja_departamento **/
+
+
+function modificar_departamento() {
+$output="";
+
+$conexion=bdexterna();	
+
+if (!$_POST){
+	$output='<form id="formModDpto" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModDpto">
+	<legend align="left"><SPAN style="text-align:top">Cambiar un departamento</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar un Departamento:&nbsp;<p align="center"><select name="nombDpto" size="5" required>';
+	
+	$sql="SELECT nombre FROM departamentos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+			//$id=$row["id_dpto"];
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</p></select>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicar el nuevo nombre de departamento:&nbsp; <input type="text" style="color:blue" name="nuevo" required></p></fieldset>
+	</p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+else{
+	$nombre=$_POST["nombDpto"];
+	$nombnuevo=$_POST["nuevo"];
+	mysqli_select_db($conexion, "colegio");
+	$sql="SELECT ID_DPTO FROM departamentos WHERE NOMBRE='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$id=mysqli_fetch_array($result);
+	//$num=$id[0];
+	if ($nombnuevo == ""){
+		$output='<br><br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No ha introducido ning&uacute;n dato para actualizar el registro seleccionado:&nbsp;<b>' . $nombre . '</b></p>&nbsp;';
+		$output=$output . '<br><p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/departamentos/modificar_departamento">pulse aqu&iacute;</a></p>';
+	} 
+	else{
+		$sql="UPDATE departamentos SET NOMBRE='$nombnuevo' WHERE ID_DPTO= '$id[0]'";
+		if(mysqli_query($conexion, $sql)){
+			$output= '<p><b>El departamento seleccionado se ha actualizado satisfactoriamente.</b></p> 
+			<p>Nombre anterior del registro: <b>' . $_POST["nombDpto"] . '</b></p><p>Se ha actualizado por el nombre: <b>' . $_POST["nuevo"] . '</b></p>
+			<p>Identificador de registro: <b>' . $id[0] . '</b></p><br>';
+			$output=$output . '<p align="center">Si desea modificar otro departamento&nbsp;<a href="http://localhost/drupal/oficina/departamentos/modificar_departamento">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output='<p><b>Error al actualizar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+} 
+mysqli_close($conexion);
+return $output;
+
+}  /** end modificar_departamento  **/
+
+/**********
+		*********************** Docentes ***********************
+***********/
+
+function listar_docentes() {
+$output="";
+$tamano_pagina="2";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM docentes";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM docentes LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de los Docentes del centro</font></b></p>';
+$output=$output . '<table border="2"><tr>
+<th><font size="2">Identificador</font></th>
+<th><font size="2">DNI</font></th>
+<th><font size="2">Nombre</font></th>
+<th><font size="2">Apellidos</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr>
+		<td><font color="blue" size="2">'. $row["ID_DOCENTES"] . '</font></td>
+		<td><font color="blue" size="2">' . $row["DNI_D"] . '</font></td>
+		<td><font color="blue" size="2">'. $row["NOMBRE"] . '</font></td>
+		<td><font color="blue" size="2">'. $row["APELLIDOS"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/docentes/listar_docentes?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+if (!$_POST){
+	$output=$output . '<form id="formBuscarDocente" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBuscarEst"><br><legend align="left"><SPAN style="text-align:top">Busqueda de informaci&oacute;n de docentes</SPAN></legend><br>
+	<p>&emsp;&emsp;&emsp;Introducir el DNI/NIF de un docente de la lista:&ensp;&nbsp;<input style="color:blue" type="text" name="buscardni" placeholder="DNI con letra" required>
+	<p align="center">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;<input type="submit" value="Buscar Datos" style="font-weight:bold; color:black"></p>
+	</fieldset></p></form>';
+}
+else{
+	
+	$dni=$_POST["buscardni"];
+	$output= '<br><p align="center"><b>DATOS DE DOCENTE CON DNI ' . $dni . '</b>.</p>';
+	$sql="SELECT * FROM docentes WHERE dni_d='$dni'";
+	$result=mysqli_query($conexion, $sql);
+	$reg=mysqli_fetch_assoc($result);
+	if ($reg["NOMBRE"]==""){ 
+		$output=$output . '<p align="center"><b><font color="red">Error:&nbsp;</font></b>el dni&nbsp;<b>' . $dni . '</b>&nbsp;no es de la lista de docentes</p>';
+	}else{
+		$dpto=$reg["ID_DPTO"];
+		if ($result){
+			$output=$output . '<p>Nombre:&nbsp;<b>' . $reg["NOMBRE"] . '</b></p>
+			<p>Apellidos:&nbsp;<b>' . $reg["APELLIDOS"] . '</b></p>
+			<p>Direcci&oacute;n:&nbsp;<b>' . $reg["DIRECCION"] . '</b></p>
+			<p>Localidad:&nbsp;<b>' . $reg["LOCALIDAD"] . '</b></p>
+			<p>Provincia:&nbsp;<b>' . $reg["PROVINCIA"] . '</b></p>
+			<p>C&oacute;digo Postal:&nbsp;<b>' . $reg["CODIGO_P"] . '</b></p>
+			<p>Tel&eacute;fono:&nbsp;<b>' . $reg["TELF_FIJO"] . '</b></p>
+			<p>M&oacute;vil:&nbsp;<b>' . $reg["MOVIL"] . '</b></p>
+			<p>Direcci&oacute;n de correo:&nbsp;<b>' . $reg["EMAIL"] . '</b></p>
+			<p>Categor&iacute;a:&nbsp;<b>' . $reg["TIPO_D"] . '</b></p>';
+			$jefe=$reg["JEFE_DPTO"];
+			
+			$sql="SELECT * FROM departamentos WHERE id_dpto='$dpto'";
+			$result=mysqli_query($conexion, $sql);
+			$nombDpto=mysqli_fetch_assoc($result);
+		
+			if ($jefe=='1'){
+				$output=$output . '<p>Jefe de Departamento:&nbsp;<b>' . $nombDpto["NOMBRE"] . '</b></p>';
+			}else{
+				$output=$output . '<p>Departamento:&nbsp;<b>' . $nombDpto["NOMBRE"] . '</b></p>';
+			}
+		 
+		}else{
+			$output=$output . '<p align="center"><b>Incorrecto el DNI, no se encuentra</b></p>';
+		}
+	}
+	
+}
+
+mysqli_close($conexion);
+
+return $output;
+}	/** end listar_docentes **/
+
+
+function alta_docente() {
+$output="";
+$conexion=bdexterna();
+$etiq_Doc=array("Nombre","Apellidos", "DNI/NIF", "Direcci&oacute;n", "Localidad", "Provincia","Categor&iacute;a", "Tel&eacute;fono", "M&oacute;vil",  "Email", "C&oacute;digo Postal", "Departamento", "Jefe de Departamento");
+
+if (!$_POST){
+$output='<form id="formAltaDocente" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formAltaDocente">
+	<legend align="left"><SPAN style="text-align:top">Introducir datos personales del nuevo docente</SPAN></legend>
+        <br><br>
+	<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniDocente" maxlength="9" required autofocus placeholder="DNI con Letra">
+	&emsp;&emsp;&emsp;&emsp;&ensp;Nombre:&emsp;<input type="text" style="color:blue" name="nombDocente" required></p>
+	<p>&emsp;&emsp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosDocente" required>	
+	&emsp;&emsp;&emsp;&emsp;&ensp;Direcci&oacute;n:&emsp;<input type="text" style="color:blue" name="dirDocente"></p>
+	<p>&emsp;&emsp;Localidad:&emsp;<input type="text" style="color:blue" name="localidadDocente">
+	&emsp;&emsp;&emsp;&emsp;&ensp;Provincia:&emsp;<input type="text" style="color:blue" name="provDocente"></p>
+	<p>&emsp;&emsp;C&oacute;digo Postal:&emsp;<input type="num" style="color:blue" name="cpDocente" maxlength="5">		
+	&emsp;&emsp;&ensp;Tel&eacute;fono fijo:&emsp;<input type="tel" style="color:blue" name="telDocente" maxlength="9"></p>	
+	<p>&emsp;&emsp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilDocente" maxlength="9">		
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Email:&emsp;<input type="email" style="color:blue" name="emailDocente"></p>	
+	</fieldset>
+	</p>
+	<p>
+	<fieldset form="formAltaDocente">
+	<legend align="left"><SPAN style="text-align:top">Introducir datos profesionales del nuevo docente</SPAN></legend>
+        <br><br>
+	&emsp;&emsp;Seleccionar categor&iacute;a:&nbsp;<p align="center"><select name="categoriaDocente" required size="2">
+		<option>Maestro/a</option><option>Profresor/a</option></select></p>
+	&emsp;&emsp;Seleccionar Departamento:&nbsp;<p align="center"><select name="dptoDocente" required size="6">';
+	
+	$sql="SELECT nombre FROM departamentos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+
+	$output=$output . '</select></p>
+	<p>&emsp;&emsp;Jefe de Departamento:&emsp;
+		<input type="radio" name="jefeDptoDocente" value="0" checked>&emsp;&ensp;
+		<input type="radio" name="jefeDptoDocente" value="1">&ensp;&nbspSi</p>		
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+ }
+elseif (($_POST['dniDocente'] == "") && ($_POST['nombDocente'] == "") && ($_POST['apellidosDocente'] == "")){
+		$output='<br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No puede dar de alta un Docente sin introducir los datos requeridos (DNI, NOMBRE, APELLIDOS)</p><p align="center">Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/docentes/alta_docente">pulse aqu&iacute;</a></p>'; 
+
+} 
+else{
+	$reg[0]=$_POST["nombDocente"];		$reg[1]=$_POST["apellidosDocente"];//1595
+	$reg[2]=$_POST["dniDocente"];		$reg[3]=$_POST["dirDocente"];
+	$reg[4]=$_POST["localidadDocente"];	$reg[5]=$_POST["provDocente"];
+	$reg[6]=$_POST["cpDocente"];		$reg[7]=$_POST["telDocente"];
+	$reg[8]=$_POST["movilDocente"];		$reg[9]=$_POST["emailDocente"];
+	$reg[10]=$_POST["categoriaDocente"];	$reg[11]=$_POST["dptoDocente"];
+	$reg[12]=$_POST["jefeDptoDocente"];
+
+	$sql="SELECT id_dpto FROM departamentos WHERE nombre='$reg[11]'";
+	$result=mysqli_query($conexion, $sql);
+	$idDpto=mysqli_fetch_array($result);
+	$sql="INSERT INTO docentes (ID_DOCENTES, ID_DPTO, DNI_D, NOMBRE, APELLIDOS, TIPO_D, JEFE_DPTO, MOVIL, DIRECCION, LOCALIDAD, CODIGO_P, PROVINCIA, EMAIL, TELF_FIJO) 
+		VALUES (NULL, '$idDpto[0]', '$reg[2]', '$reg[0]', '$reg[1]', '$reg[10]', '$reg[12]', '$reg[8]', '$reg[3]', '$reg[4]', '$reg[6]', '$reg[5]', '$reg[9]', '$reg[7]')";
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<p><b>Nuevo Docente registrado satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp<b>' . $ant_id . '</b></p>'; 
+		for($i=0;$i<12;$i++){
+			if($reg[$i]<>""){
+				$output=$output . '<p><em>' . $etiq_Doc[$i] . ':&nbsp;</em><b>' . $reg[$i] .'</b></p>';	
+			}
+			
+		}
+		if($reg[$i]){
+			$output= $output . '<p><em>' . $etiq_Doc[$i] . ':&nbsp;</em><b>Si</b></p>';
+		}else{
+			$output= $output . '<p><em>' . $etiq_Doc[$i] . ':&nbsp;</em><b>No</b></p>';
+		}		
+		$output= $output . '<br><br>
+		<p align="center">Si desea agregar otro departamento <a href="http://localhost/drupal/oficina/docentes/alta_docente">pulse aqu&iacute;</a></p>'; 
+	}
+	
+}
+
+mysqli_close($conexion);
+
+return $output;
+}	/** end alta_docente  **/
+
+
+function baja_docente() {
+$output="";
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formBajaDocente" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaDocente">
+	<legend align="left"><SPAN style="text-align:top">Eliminar un docente</SPAN></legend>
+        <br><br>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar DNI/NIF de docente:&emsp;&ensp;<p align="center">
+	<select required name="dniDocente" size="6">';
+	$sql="SELECT * FROM docentes";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["DNI_D"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+
+	$output=$output . '</select></p></p>
+	</fieldset>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){
+	$dni=$_POST["dniDocente"];
+	$sql="SELECT nombre, apellidos FROM docentes WHERE dni_d='$dni'";
+	$result=mysqli_query($conexion, $sql);
+	$reg=mysqli_fetch_array($result);
+
+	$output='<form id="formConfirmarDoc" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarDoc">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja al docente con:</p>
+	<p align="center">DNI/NIF<b>&nbsp;"' . $dni . '"</b></p>
+	<p align="center">Apellidos y Nombre<b>&nbsp;"' . $reg[1] . ',&nbsp;' . $reg[0] . '"</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="dniDoc" value="' . $dni . '"><input type="hidden" name="Doc" value="' . $reg[1] . ',&nbsp;' . $reg[0] . '">
+	</p></fieldset></p></form>';
+
+}
+else{
+	$dni=$_POST["dniDoc"];
+	$ApelNomb=$_POST["Doc"];
+	if(isset($_POST["Aceptar"])){
+		$sql="SELECT * FROM docentes WHERE dni_d='$dni'";
+		$result=mysqli_query($conexion, $sql);
+		$reg=mysqli_fetch_array($result);
+		//$sql="DELETE FROM docentes WHERE ID_DOCENTES='$id[0]'";
+			//if(mysqli_query($conexion, $sql)){	
+				$output= $output .'<p><b>El docente seleccionado se ha borrado satisfactoriamente</b>.</p>
+				<p>Identificador del registro: <b>' .$reg[0] . '</b></p> 
+				<p>DNI del docente: <b>' . $reg[2] . '</b></p>
+				<p>Nombre del docente: <b>' . $reg[3] . '</b></p>
+				<p>Apellidos del docente: <b>' . $reg[4] . '</b></p><br><br>';
+				$output=$output . '<p align="center">Si desea eliminar otro docente&nbsp;<a href="http://localhost/drupal/oficina/docentes/baja_docente">pulse aqu&iacute;</a></p>';		
+			//}
+			//else{
+			//	$output='<p><b>Error al eliminar el registro con el D.N.I.:&nbsp;' . $dni . '<b></p>';
+			//	$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+			//}
+	}else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar docente con:<br>
+		Apellidos y Nombre&nbsp;<font color="red">"' . $ApelNomb . '"</font><br>y DNI/NIF&nbsp;
+		<font color="red">"' . $dni . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Docente"&nbsp;<a href="http://localhost/drupal/oficina/docentes/baja_docente">pulse aqu&iacute;</a></p>'; 
+
+	}
+}
+
+mysqli_close($conexion);
+return $output;
+
+}	/** end baja_docente  **/
+
+
+function modificar_docente() {
+$output="";
+$conexion=bdexterna();
+$etiq_Per=array("Nombre","Apellidos","DNI/NIF","Direcci&oacute;n","Localidad","Provincia","C&oacute;digo Postal","Tel&eacute;fono","M&oacute;vil","Email");
+$etiq_Prof=array("Categor&iacute;a","Departamento","Jefe de Departamento");
+
+if (!$_POST){
+	
+	$output='<form id="formModDocente" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModDocente">
+	<legend align="left"><SPAN style="text-align:top">Cambiar datos de un docente</SPAN></legend>
+        <br><br>
+	&emsp;&nbsp;Seleccionar un DNI/NIF de docente:&nbsp;<p align="center"><select name="dniDocente" size="5" required>';
+	
+	$sql="SELECT dni_d FROM docentes";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["dni_d"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p>
+	&emsp;&nbsp;Indicar tipo de datos a modificar:&nbsp;<p align="center"><select name="tipoDatos" size="2" required>
+	<option>Personales</option><option>Profesionales</option></select>
+	</p>
+	</fieldset>
+	</p>
+	<p><input type="submit" name="Siguiente" value="Siguiente" style="font-weight:bold; color:black">&emsp;&nbsp;
+	<input type="reset" value="Limpiar" style="font-weight:bold; color:black"></p>';
+} 
+elseif (isset($_POST["Siguiente"])){
+	$dni=$_POST["dniDocente"];
+	$tipod=$_POST["tipoDatos"];
+	
+	$sql="SELECT * FROM docentes WHERE dni_d='$dni'";
+	$result=mysqli_query($conexion, $sql);
+	$reg=mysqli_fetch_array($result);
+	$output='<form id="formModDocS" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p><fieldset form="formModDocS">';
+	if ($tipod == "Personales"){
+		$output=$output . '<legend align="left"><SPAN style="text-align:top">Modificar datos personales del docente</SPAN></legend>
+        	<br><br>
+		<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniDocente" maxlength="9" value="' . $reg[2] . '" required autofocus placeholder="DNI con Letra">
+		&emsp;&emsp;&emsp;&emsp;&ensp;Nombre:&emsp;<input type="text" style="color:blue" name="nombDocente" value="' . $reg[3] . '"required></p>
+		<p>&emsp;&emsp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosDocente" value="' . $reg[4] . '"required>	
+		&emsp;&emsp;&emsp;&emsp;&ensp;Direcci&oacute;n:&emsp;<input type="text" style="color:blue" name="dirDocente" value="' . $reg[8] . '"></p>
+		<p>&emsp;&emsp;Localidad:&emsp;<input type="text" style="color:blue" name="localidadDocente" value="' . $reg[9] . '">
+		&emsp;&emsp;&emsp;&emsp;&ensp;Provincia:&emsp;<input type="text" style="color:blue" name="provDocente" value="' . $reg[11] . '"></p>
+		<p>&emsp;&emsp;C&oacute;digo Postal:&emsp;<input type="num" style="color:blue" name="cpDocente" maxlength="5" value="' . $reg[10] . '">		
+		&emsp;&emsp;&emsp;Tel&eacute;fono fijo:&emsp;<input type="tel" style="color:blue" name="telDocente" maxlength="9" value="' . $reg[13] . '"></p>	
+		<p>&emsp;&emsp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilDocente" maxlength="9" value="' . $reg[7] . '">		
+		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Email:&emsp;<input type="email" style="color:blue" name="emailDocente" value="' . $reg[12] . '"></p>
+		<input type="hidden" name="oculto" value="Personales"><input type="hidden" value="' . $reg[0] . '" name="idDocente">';	
+	}
+	else{
+		if($reg[5]=="Maestro/a"){
+			$cadena1='<option selected>Maestro/a</option><option>Profresor/a</option></select>';
+		}
+		else{
+			$cadena1='<option>Maestro/a</option><option selected>Profresor/a</option></select>';
+		}
+		if($reg[6]=='1'){
+			$cadena2='<input type="radio" name="jefeDptoDocente" value="0" >&ensp;&nbsp;No&ensp;&nbsp;
+				<input type="radio" name="jefeDptoDocente" value="1" checked>&ensp;&nbspSi</p>';
+		}
+		else{
+			$cadena2='<input type="radio" name="jefeDptoDocente" value="0" checked>&ensp;&nbspNo&ensp;&nbsp;
+				<input type="radio" name="jefeDptoDocente" value="1">&ensp;&nbspSi</p>';
+		}
+		$output=$output . '<legend align="left"><SPAN style="text-align:top">Modificar datos profesionales del docente</SPAN></legend>
+        	<br><br>
+		&emsp;&emsp;Categor&iacute;a:&nbsp;<p align="center"><select name="categoriaDocente" required size="2">' . $cadena1 . '</p>
+		&emsp;&emsp;Departamento:&nbsp;<p align="center"><select name="dptoDocente" required size="6">';
+	
+		$sql="SELECT id_dpto, nombre FROM departamentos";
+		$result=mysqli_query($conexion, $sql);
+		if (mysqli_num_rows($result) > 0){
+			while($dpto=mysqli_fetch_assoc($result)){
+				if($reg[1]==$dpto["id_dpto"]){
+					$output= $output . '<option selected>' . $dpto["nombre"] . '</option>';
+				}
+				else{
+					$output= $output . '<option>' . $dpto["nombre"] . '</option>';
+				}
+			}
+		}
+		else{
+		  	$output= $output . '<option></option>';
+		}
+
+		$output=$output . '</select></p>
+		<p>&emsp;&nbsp;&nbsp;&nbsp;Jefe de Departamento:&emsp;' . $cadena2 . '<input type="hidden" name="oculto" value="Profesinales">
+		<input type="hidden" name="idDocente" value="' . $reg[0] . '">';		
+	}
+	$output=$output . '</fieldset></p><input type="submit" value="Grabar" name="Grabar"style="font-weight:bold; color:black"></form>';
+}elseif (isset($_POST["Grabar"])){
+	if ($_POST["oculto"]=="Personales"){//1800
+		$id=$_POST["idDocente"];
+		$reg[0]=$_POST["nombDocente"];$reg[1]=$_POST["apellidosDocente"];$reg[2]=$_POST["dniDocente"];
+		$reg[3]=$_POST["dirDocente"];$reg[4]=$_POST["localidadDocente"];$reg[5]=$_POST["provDocente"];$reg[6]=$_POST["cpDocente"];
+		$reg[7]=$_POST["telDocente"];$reg[8]=$_POST["movilDocente"];$reg[9]=$_POST["emailDocente"];
+		
+//$etiq_Per=array("Nombre","Apellidos","DNI/NIF","Direcci&oacute;n","Localidad","Provincia","C&oacute;digo Postal","Tel&eacute;fono","M&oacute;vil","Email");		
+
+		$sql="UPDATE docentes SET DNI_D='$reg[2]', NOMBRE='$reg[0]', APELLIDOS='$reg[1]', MOVIL='$reg[8]', DIRECCION='$reg[3]', LOCALIDAD='$reg[4]', CODIGO_P='$reg[6]', PROVINCIA='$reg[5]', EMAIL='$reg[9]', TELF_FIJO='$reg[7]' WHERE ID_DOCENTES='$id'";
+		if(mysqli_query($conexion, $sql)){
+			$output= $output . '<p><b>El docente seleccionado se ha actualizado satisfactoriamente.</b></p>
+			<p>Los datos personales grabados son:</p>';
+			for ($i=0;$i<9;$i++){
+				if($reg[$i]<>""){
+					$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_Per[$i] . ':</em>&nbsp;<b>' . $reg[$i] . '</b></p>';
+				}
+			}
+			$output= $output . '<br><br>
+			<p align="center">Si desea modificar otro docente <a href="http://localhost/drupal/oficina/docentes/modificar_docente">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output='<p><b>Error al actualizar el registro de docente<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+	else{
+		$id=$_POST["idDocente"];
+		$reg[0]=$_POST["categoriaDocente"];$reg[1]=$_POST["dptoDocente"];$reg[2]=$_POST["jefeDptoDocente"];
+//$etiq_Prof=array("Categor&iacute;a","Departamento","Jefe de Departamento");
+		
+		$sql="SELECT id_dpto FROM departamentos WHERE nombre='$reg[1]'";
+		$idDpto=mysqli_fetch_array(mysqli_query($conexion, $sql));
+		$sql="SELECT dni_d FROM docentes WHERE id_docentes='$id'";
+		$dni=mysqli_fetch_array(mysqli_query($conexion, $sql));
+
+		$sql="UPDATE docentes SET  ID_DPTO='$idDpto[0]', TIPO_D='$reg[0]', JEFE_DPTO='$reg[2]' WHERE ID_DOCENTES='$id'";
+		if(mysqli_query($conexion, $sql)){
+			$output= $output . '<p><b>El docente seleccionado con D.N.I.&nbsp;' . $dni[0] . '&nbsp;se ha actualizado satisfactoriamente.</b></p>
+			<p>Los datos profesionales grabados son:</p>';
+			for ($i=0;$i<2;$i++){
+				if($reg[$i]<>""){
+					$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_Prof[$i] . ':</em>&nbsp;<b>' . $reg[$i] . '</b></p>';
+				}
+			}
+			
+			if ($reg[$i]){
+			 	$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_Prof[$i] . ':</em>&nbsp;<b>Si</b></p>';
+			}
+			else{
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_Prof[$i] . ':</em>&nbsp;<b>No</b></p>';
+			}
+			$output= $output . '<br><br>
+			<p align="center">Si desea modificar otro docente <a href="http://localhost/drupal/oficina/docentes/modificar_docente">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output='<p><b>Error al actualizar el registro de docente<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+	
+} 
+
+mysqli_close($conexion);
+return $output;
+
+}	/** end modificar_docente **/
+
+
+
+/****************
+			******************* Estudiantes *********************
+*****************/
+function listar_estudiantes(){
+$output="";
+$tamano_pagina="2";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM estudiantes";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM estudiantes LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de los Estudiantes del centro</font></b></p>';
+$output=$output . '<table border="2"><tr>
+<th><font size="2">Identificador</font></th>
+<th><font size="2">DNI</font></th>
+<th><font size="2">Nombre</font></th>
+<th><font size="2">Apellidos</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr>
+		<td><font color="blue" size="2">'. $row["ID_EST"] . '</font></td>
+		<td><font color="blue" size="2">' . $row["DNI"] . '</font></td>
+		<td><font color="blue" size="2">'. $row["NOMBRE"] . '</font></td>
+		<td><font color="blue" size="2">'. $row["APELLIDOS"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/estudiantes/listar_estudiantes?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+if (!$_POST){
+	$output=$output . '<br><br><form id="formBuscarEst" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBuscarEst"><br><legend align="left"><SPAN style="text-align:top">Busqueda de informaci&oacute;n de estudiantes</SPAN></legend><br>
+	<p>&emsp;&emsp;&emsp;Indroducir identificador de estudiante:&ensp;&nbsp;<input style="color:blue" type="text" name="buscarid" placeholder="Identificador" required></p>
+	<p>&emsp;&emsp;&emsp;Seleccionar datos de:&ensp;&nbsp;<select name="datos"><option selected>Estudiante</option><option>Padres</option></select></p>
+	<p align="center">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" value="Buscar Datos" style="font-weight:bold; color:black"></p>
+	</fieldset></p></form>';
+}
+else{
+	$id=$_POST["buscarid"];
+	$sql="SELECT * FROM estudiantes WHERE id_est='$id'";
+	$result=mysqli_query($conexion, $sql);
+	$row=mysqli_fetch_assoc($result);
+	
+	if ($row["NOMBRE"]==""){ 
+		$output='<p align="center"><b><font color="red">Error:&nbsp;</font></b>el identificador&nbsp;<b>' . $id . '</b>&nbsp;no es de la lista de estudiantes</p>';
+	}
+	else{
+		if ($_POST["datos"]=="Estudiante"){
+			$output= '<br><p align="center"><b>DATOS DE ESTUDIANTE CON IDENTIFICADOR ' . $id . '</b>.</p>';
+			if ($result){
+				$output=$output . '<p>Nombre:&nbsp;<b>' . $row["NOMBRE"] . '</b></p>
+				<p>Apellidos:&nbsp;<b>' . $row["APELLIDOS"] . '</b></p>
+				<p>Direcci&oacute;n:&nbsp;<b>' . $row["DIRECCION"] . '</b></p>
+				<p>Localidad:&nbsp;<b>' . $row["LOCALIDAD"] . '</b></p>
+				<p>Provincia:&nbsp;<b>' . $row["PROVINCIA"] . '</b></p>
+				<p>C&oacute;digo Postal:&nbsp;<b>' . $row["CPOSTAL"] . '</b></p>
+				<p>Fecha de Nacimiento:&nbsp;<b>' . $row["FECHA_NACIMIENTO"] . '</b></p>';
+				if($row["DNI"]==""){
+					$output=$output . '<p>D.N.I.:&nbsp;<b>' . $row["DNI"] . '</b></p>';
+				}
+				$output= $output . '<br>
+				<p align="center">Si desea volver al listado de estudiantes&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/listar_estudiantes">pulse aqu&iacute;</a></p>'; 
+			}
+			else{
+				$output=$output . '<p align="center"><b>Fallo del sistema al realizar la consulta, puede intentarlo m&aacute;s tarde</b></p>';
+			}
+		
+		}
+		else{
+			$id_p=$row["ID_PADRES"];
+			$output='<br><p align="center"><b>DATOS FAMILIARES DEL ESTUDIANTE ' . $row["NOMBRE"] . ' ' . $row["APELLIDOS"] .'</b>.</p>';
+			$sql1="SELECT * FROM padres WHERE id_padres='$id_p'";
+			$result1=mysqli_query($conexion, $sql1);
+			$row1=mysqli_fetch_assoc($result1);
+			if ($result1){
+				$output=$output . '<p><u>DATOS DEL PADRE</u></p>
+				<p>Nombre:&nbsp;<b>' . $row1["NOMB_PADRE"] . '</b>&emsp;&emsp;Apellidos:&nbsp;<b>' . $row1["APEL_PADRE"] . '</b></p>
+				<p>D.N.I.:&nbsp;<b>' . $row1["DNI_P"] . '</b>&emsp;&emsp;Fecha nacimiento:&nbsp;<b>' . $row1["F_NAC_PADRE"] . '</b></p>
+				<p>Profesi&oacute;n:&nbsp;<b>' . $row1["PROF_PADRE"] . '</b>&emsp;&emsp;M&oacute;vil:&nbsp;<b>' . $row1["MOVIL_PADRE"] . '</b></p>
+				<p><u>DATOS DE LA MADRE</u></p>
+				<p>Nombre:&nbsp;<b>' . $row1["NOMB_MADRE"] . '</b>&emsp;&emsp;Apellidos:&nbsp;<b>' . $row1["APEL_MADRE"] . '</b></p>
+				<p>D.N.I.:&nbsp;<b>' . $row1["DNI_M"] . '</b>&emsp;&emsp;Fecha nacimiento:&nbsp;<b>' . $row1["F_NAC_MADRE"] . '</b></p>
+				<p>Profesi&oacute;n:&nbsp;<b>' . $row1["PROF_MADRE"] . '</b>&emsp;&emsp;M&oacute;vil:&nbsp;<b>' . $row1["MOVIL_MADRE"] . '</b></p>';
+				$output= $output . '<br>
+				<p align="center">Si desea volver al listado de estudiantes&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/listar_estudiantes">pulse aqu&iacute;</a></p>'; 
+			}
+			else{
+				$output=$output . '<p align="center"><b>Fallo del sistema al realizar la consulta, puede intentarlo m&aacute;s tarde</b></p>';
+			}
+		
+
+		}
+
+
+	}
+}
+
+mysqli_close($conexion);
+
+return $output;
+}	/** end listar_estudiantes **/
+
+function alta_estudiante() {
+$output="";$padres=[];$est=[];
+$conexion=bdexterna();
+$etiq_Est= array("Nombre", "Apellidos", "Direcci&oacute;n", "Localidad", "Provincia", "C&oacute;digo Postal", "Tel&eacute;fono", "DNI/NIF", "Fecha de Nacimiento");
+$etiq_P= array("Nombre", "Apellidos",  "Fecha de Nacimiento",  "DNI/NIF", "Profesi&oacute;n", "M&oacute;vil", "OBSERVACIONES");
+
+
+if (!$_POST){
+	$output='<form id="formInicioEstudiante" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formInicioEstudiante">
+	<legend align="left"><SPAN style="text-align:top">Informaci&oacute;n de tutores para alta estudiante</SPAN></legend>
+        <br><br>
+	<p>&emsp;&emsp;DNI/NIF Tutor1:&emsp;<input type="text" style="color:blue" name="dniT1" required maxlength="9" placeholder="DNI con Letra">
+	&emsp;&emsp;&ensp;DNI/NIF Tutor2:&emsp;<input type="text" style="color:blue" name="dniT2" required maxlength="9" placeholder="DNI con Letra"></p>
+	<p align="center">Hijos/as matriculados/as en el centro:&ensp;<input type="radio" name="nuevoEst" value="0" required>&ensp;S&iacute;&ensp;
+	<input type="radio" name="nuevoEst" value="1" required>&ensp;No</p>
+	</fieldset>
+	<p><input type="submit" value="Siguiente" name="Siguiente" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black"></p>  
+	</p>
+	</form>';
+	
+}
+elseif (isset($_POST["Siguiente"])){
+	$nuevo=$_POST['nuevoEst'];
+	if(($_POST['dniT1'] == "") || ($_POST['dniT2'] == "")){
+		$output='<br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No se ha introducido todos los datos requeridos:</p>
+		<p>DNI/NIF de Tutor1 y de Tutor2</p>
+		<p align="center">Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>'; 
+	}
+	else{
+		if ($nuevo=='1'){   	//Introducir datos de familia  
+			$dniP=$_POST['dniT1'];	$dniM=$_POST['dniT2'];
+			$sql1="SELECT * FROM padres WHERE DNI_P='$dniP' AND DNI_M='$dniM'";
+			$result1=mysqli_query($conexion, $sql1);//1954
+			if($result1){
+				if(mysqli_num_rows($result1) == 0){
+					$sql2="INSERT INTO padres (ID_PADRES, DNI_P, DNI_M) VALUE (NULL, '$dniP', '$dniM')";
+					if(mysqli_query($conexion, $sql2)){
+						$id_p=mysqli_insert_id($conexion);
+						$output='<form id="formAlta1Est" action="" method="post" accept-charset="UTF-8" size="100%">
+						<p>
+						<fieldset form="formAltaAlta1Est">
+						<legend align="left"><SPAN style="text-align:top">Introducir datos del nuevo estudiante</SPAN></legend>
+        					<br><br>
+						<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombEst" required autofocus>
+						&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosEst" required></p>
+						<p>&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacEst" required placeholder="dd/mm/aaaa" maxlength="10">
+						&emsp;&emsp;DNI/NIF&emsp;<input type="text" style="color:blue" name="dniEst" maxlength="9" placeholder="DNI con Letra"></p>
+						<p>&emsp;&emsp;Direcci&oacute;n:&emsp;<input type="text" style="color:blue" name="dirEst">
+						&emsp;&emsp;&emsp;&emsp;&ensp;Localidad:&emsp;<input type="text" style="color:blue" name="localidadEst"></p>
+						<p>&emsp;&emsp;Provincia:&emsp;<input type="text" style="color:blue" name="provEst">
+						&emsp;&emsp;&emsp;&emsp;&ensp;C&oacute;digo Postal:&emsp;<input type="num" style="color:blue" name="cpEst" maxlength="5"></p>
+						<p>&emsp;&emsp;Tel&eacute;fono fijo:&emsp;<input type="tel" style="color:blue" name="telEst" maxlength="9"></p>			
+						</fieldset></p>
+						<p>
+						<fieldset form="formAltaAlta1Est">
+						<legend align="left"><SPAN style="text-align:top">Introducir datos del padre<SPAN></legend>
+        					<br><br>
+						<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniP" value="' . $dniP . '" maxlength="9" required>
+						&emsp;&emsp;&emsp;&emsp;&ensp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacP" required placeholder="dd/mm/aaaa" maxlength="10"></p>
+						<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombP" required>
+						&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosP" required></p>
+						<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profP">			
+						&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilP" maxlength="9"></p>			
+						</fieldset></p>
+						<p>
+						<fieldset form="formAltaAlta1Est">
+						<legend align="left"><SPAN style="text-align:top">Introducir datos de la madre<SPAN></legend>
+        					<br><br>
+						<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniM" value="' . $dniM . '" maxlength="9" required>
+						&emsp;&emsp;&emsp;&emsp;&ensp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacM" required placeholder="dd/mm/aaaa" maxlength="10"></p>
+						<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombM" required>
+						&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosM" required></p>
+						<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profM">			
+						&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilM" maxlength="9"></p>			
+						</fieldset></p>
+						<p>&nbsp;<b>Observaciones:</b><textarea name="observaciones" style="color:blue" rows="4" cols="103"></textarea></p>  
+						<p><input type="submit" value="Grabar" name="Grabar" style="font-weight:bold; color:black"></p>  
+						<input type="hidden" value="' . $id_p . '" name="idP">
+						<input type="hidden" value="' . $dniP . '" name="dniP"><input type="hidden" value="' . $dniM . '" name="dniM">
+						</form>';//2033
+					}else{
+						$output='<p><b>Error en el alta de tutores del estudiante</b></p>';
+						$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+					}
+				}elseif(mysqli_num_rows($result1) == 1){
+					$output='<br><p><font color="red"><b>Error de tutores:</b></font></p><p>Tiene hijos/as matriculados/as anteriormente</p>
+					<p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>';
+				}
+				
+			}
+			else{
+				$output='<br><p><font color="red"><b>Atenci&oacute;n</b></font></p><p>Error en consulta de datos padres</p>
+					<p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>';
+			}
+		}elseif ($nuevo=='0'){		//Actualizar datos familia 
+			$dniP = $_POST['dniT1']; $dniM = $_POST['dniT2'];
+			$sqlP ="SELECT * FROM padres WHERE DNI_P='$dniP' AND DNI_M='$dniM'";
+			$resultP = mysqli_query($conexion, $sqlP);
+			if ($resultP){
+				$filas=mysqli_num_rows($resultP);
+				if(mysqli_num_rows($resultP) == 0){         
+					$output='<br><p><font color="red"><b>Error al buscar datos</b></font></p><p>No ha matriculado ning&uacute;n estudiante anteriormente</p>
+					<p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>';
+				}elseif (mysqli_num_rows($resultP) == 1){
+					$rowP =mysqli_fetch_assoc($resultP);
+					preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $rowP['F_NAC_PADRE'], $nfechaP);
+					$fechaP=$nfechaP[3] . "/" . $nfechaP[2] . "/" . $nfechaP[1];
+					preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $rowP['F_NAC_MADRE'], $nfechaM);
+					$fechaM=$nfechaM[3] . "/" . $nfechaM[2] . "/" . $nfechaM[1];
+					$output='<form id="formAlta2Est" action="" method="post" accept-charset="UTF-8" size="100%">
+					<p>
+					<fieldset form="formAltaAlta2Est">
+					<legend align="left"><SPAN style="text-align:top">Datos obtenidos del padre:</SPAN></legend>
+        				<br><br>
+					<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniP" value="' . $rowP['DNI_P'] . '" maxlength="9">
+					&emsp;&emsp;&emsp;&emsp;&ensp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacP" value="' . $fechaP . '" maxlength="10"></p>
+					<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombP"  value="' . $rowP['NOMB_PADRE'] . '" >
+					&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosP"  value="' . $rowP['APEL_PADRE'] . '" ></p>
+					<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profP" value="' . $rowP['PROF_PADRE'] . '" >			
+					&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilP" maxlength="9" value="' . $rowP['MOVIL_PADRE'] . '" ></p>
+					</fieldset></p>
+					<p>
+					<fieldset form="formAltaAlta2Est">
+					<legend align="left"><SPAN style="text-align:top">Datos obtenidos de la madre:</SPAN></legend>
+        				<br><br>
+					<p>&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniM" value="' . $rowP['DNI_M'] . '" maxlength="9">
+					&emsp;&emsp;&emsp;&emsp;&ensp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacM" value="' . $fechaM . '" maxlength="10"></p>
+					<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombM"  value="' . $rowP['NOMB_MADRE'] . '" >
+					&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosM"  value="' . $rowP['APEL_MADRE'] . '" ></p>
+					<p>&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profM" value="' . $rowP['PROF_MADRE'] . '" >			
+					&emsp;&emsp;&emsp;&emsp;&ensp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilM" maxlength="9" value="' . $rowP['MOVIL_MADRE'] . '" ></p>
+					</fieldset></p>
+					<p>
+					<fieldset form="formAltaAlta2Est">
+					<legend align="left"><SPAN style="text-align:top">Introducir datos del nuevo estudiante</SPAN></legend>
+        				<br><br>
+					<p>&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombEst" required autofocus>
+					&emsp;&emsp;&emsp;&emsp;&ensp;Apellidos:&emsp;<input type="text" style="color:blue" name="apellidosEst" required></p>
+					<p>&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacEst" required placeholder="dd/mm/aaaa" maxlength="10">
+					&emsp;&emsp;DNI/NIF&emsp;<input type="text" style="color:blue" name="dniEst" maxlength="9" placeholder="DNI con Letra"></p>
+					<p>&emsp;&emsp;Direcci&oacute;n:&emsp;<input type="text" style="color:blue" name="dirEst">	
+					&emsp;&emsp;&emsp;&emsp;&ensp;Localidad:&emsp;<input type="text" style="color:blue" name="localidadEst"></p>
+					<p>&emsp;&emsp;Provincia:&emsp;<input type="text" style="color:blue" name="provEst">
+					&emsp;&emsp;&emsp;&emsp;&ensp;C&oacute;digo Postal:&emsp;<input type="num" style="color:blue" name="cpEst" maxlength="5"></p>
+					<p>&emsp;&emsp;Tel&eacute;fono fijo:&emsp;<input type="tel" style="color:blue" name="telEst" maxlength="9"></p>			
+					</fieldset>
+					<p>&nbsp;<b>Observaciones:</b><textarea name="observaciones" style="color:blue" rows="4" cols="103">' . $rowP['OBSERVACIONES'] . '</textarea></p> 
+					<p><input type="submit" value="Grabar" name="Grabar" style="font-weight:bold; color:black"></p>  
+					<input type="hidden" value="' . $rowP['ID_PADRES'] . '" name="idP">
+					</form>';
+				}
+			}else{
+				$output='<br><p><font color="red"><b>Atenci&oacute;n</b></font></p><p>Error en consulta de datos padres</p>
+					<p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>';
+			}
+
+			
+		}
+	}
+	
+}
+elseif (isset($_POST["Grabar"])){		
+//$etiq_P= array("Nombre", "Apellidos",  "Fecha de Nacimiento",  "DNI/NIF", "Profesi&oacute;n", "M&oacute;vil", "OBSERVACIONES");
+	$padres[0]=$_POST["nombP"];$padres[1]=$_POST["apellidosP"];$padres[2]=$_POST["fechaNacP"];$padres[3]=$_POST["dniP"];
+	$padres[4]=$_POST["profP"];$padres[5]=$_POST["movilP"];$padres[6]=$_POST["nombM"];$padres[7]=$_POST["apellidosM"];
+	$padres[8]=$_POST["fechaNacM"];$padres[9]=$_POST["dniM"];$padres[10]=$_POST["profM"];$padres[11]=$_POST["movilM"];
+	$padres[12]=$_POST["observaciones"];$id_P=$_POST["idP"];
+		
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[2], $nfecha);
+	$fechaP=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $padres[8], $nfecha);
+	$fechaM=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];//2055
+
+//$etiq_Est= array("Nombre", "Apellidos", "Direcci&oacute;n", "Localidad", "Provincia", "C&oacute;digo Postal", "Tel&eacute;fono", "DNI/NIF", "Fecha de Nacimiento");	
+	$est[0]=$_POST["nombEst"];$est[1]=$_POST["apellidosEst"];$est[2]=$_POST["dirEst"];$est[3]=$_POST["localidadEst"];$est[4]=$_POST["provEst"];
+	$est[5]=$_POST["cpEst"];$est[6]=$_POST["telEst"];$est[7]=$_POST["dniEst"];$est[8]=$_POST["fechaNacEst"];
+
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $est[8], $nfecha);
+	$fechaE=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+		
+	$sqlP="UPDATE padres SET NOMB_PADRE='$padres[0]', APEL_PADRE='$padres[1]', F_NAC_PADRE='$fechaP', DNI_P='$padres[3]', PROF_PADRE='$padres[4]', MOVIL_PADRE='$padres[5]', NOMB_MADRE= '$padres[6]', APEL_MADRE='$padres[7]', F_NAC_MADRE='$fechaM', DNI_M='$padres[9]', PROF_MADRE='$padres[10]', MOVIL_MADRE='$padres[11]', OBSERVACIONES='$padres[12]' WHERE ID_PADRES='$id_P'";
+			
+	$sqlE="INSERT INTO estudiantes (ID_EST, ID_PADRES, NOMBRE, APELLIDOS, DIRECCION, LOCALIDAD, PROVINCIA, CPOSTAL, TELF, FECHA_NACIMIENTO, DNI) 
+	VALUES (NULL, '$id_P', '$est[0]', '$est[1]', '$est[2]', '$est[3]', '$est[4]', '$est[5]', '$est[6]', '$fechaE', '$est[7]')";
+
+	if((mysqli_query($conexion, $sqlP)) && (mysqli_query($conexion, $sqlE))){
+		$id_est=mysqli_insert_id($conexion);
+		$output= '<p><b>Estudiante registrado satisfactoriamente</b>.</p><p><em>Identificador de nuevo registro:</em>&nbsp<b>' . $id_est . '</b></p> 
+		<p><b><ins>Datos del estudiante:</ins></b></p>';
+		for ($i=0;$i<9;$i++){
+			if($est[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_Est[$i] . ':</em>&nbsp;<b>' . $est[$i] . '</b></p>';	
+			}
+		}			
+		$output= $output . '<p><b>Padres registrados satisfactoriamente</b>.</p><p><em>Identificador de nuevo registro:</em>&nbsp<b>' . $id_P . '</b></p> 
+		<p><b><u>Datos del padre:</u></b></p>';
+		for ($i=0;$i<6;$i++){
+			if($padres[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_P[$i] . ':</em>&nbsp;<b>' . $padres[$i] . '</b></p>';	
+			}
+		}
+		$output= $output . '<p><b><u>Datos de la madre:</u></b></p>';
+		for ($i=6;$i<12;$i++){
+			if($padres[$i]<>""){
+				$output= $output . '<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>' . $etiq_P[$i-6] . ':</em>&nbsp;<b>' . $padres[$i] . '</b></p>';	
+			}
+		}
+		if ($_POST["observaciones"]<>""){
+			$output= $output . '<p><b>' . $etiq_P[6] . ':&nbsp;&nbsp;</b>' . $padres[12] . '</p>';
+		}
+		$output= $output . '<br>
+		<p align="center">Si desea agregar otro estudiante <a href="http://localhost/drupal/oficina/estudiantes/alta_estudiante">pulse aqu&iacute;</a></p>'; 
+	}else{
+
+		$output='<br><br><p><font color="red"><b>Atenci&oacute;n</b></font></p>
+			<p>Error al dar de alta los datos del estudiante: ' . $est[0] . ' ' . $est[1] . '</p>';
+		$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+	}	
+}
+
+mysqli_close($conexion);
+
+return $output;
+}	/** end alta_estudiante  **/
+
+
+function baja_estudiante() {
+$output="";
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formBajaEst" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaEst">
+	<legend align="left"><SPAN style="text-align:top">Eliminar un estudiante</SPAN></legend>
+        <br><br>
+	<p>&emsp;&emsp;&nbsp;Seleccionar Nombre completo del Estudiante:&emsp;&emsp;&emsp;<p align="center">
+	<select required name="Estudiante" size="6">';
+	$sql="SELECT * FROM estudiantes";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["APELLIDOS"] . ', ' . $row["NOMBRE"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+
+	$output=$output . '</select></p></p>
+	<p>&emsp;&emsp;&nbsp;Datos a eliminar del estudiante:&emsp;&emsp;&emsp;<p align="center">
+	<select required name="datos" size="2"><option selected value="Parciales">Parciales:solo datos del estudiante</option>
+	<option value="Totales">Totales:datos del estudiante y familiares</option></select></p>
+	</fieldset>
+	<p><input type="submit" value="Eliminar" name="Eliminar" style="font-weight:bold; color:black">&emsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){
+	$est=$_POST["Estudiante"];
+	if($_POST["datos"]=="Totales"){
+		$datos=$_POST["datos"] . ": Datos de estudiante y familiares";
+	}else{
+		$datos=$_POST["datos"] . ": Datos de estudiante";
+	}
+	
+	$output='<form id="formConfirmar" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirma">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja al estudiante<b>&nbsp;"' . $est . '"</b></p>
+	<p align="center">A eliminar con los siguiente datos<b>&nbsp;"' . $datos . '"</b></p>
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="est" value="' . $est . '"><input type="hidden" name="datos" value="' . $_POST["datos"] . '">
+	</p></fieldset></p></form>';
+}else{
+	$est=$_POST["est"];
+	$datos=$_POST["datos"];
+	if(isset($_POST["Aceptar"])){
+		$nombre=substr($est, (strpos($est, ",")+1));
+		$long=strlen($nombre);
+		$nombre=ltrim($nombre);
+		$apellidos=substr($est, 0, -($long+1));
+		$apellidos=ltrim($apellidos);
+
+		$sql="SELECT * FROM estudiantes WHERE apellidos='$apellidos' AND nombre='$nombre'";
+		$result=mysqli_query($conexion, $sql);
+		$regEst=mysqli_fetch_array($result);
+		
+		if($datos=="Parciales"){
+			$sql1="SELECT id_padres FROM estudiantes WHERE id_padres='$regEst[1]'";
+			$result1=mysqli_query($conexion, $sql1);
+			$total_filas=mysqli_num_rows($result1);
+			if($total_filas==1){
+				$output='<br><p align="center"><font color="red"><b>Atenci&oacute;n:</b>&nbsp;El estudiante seleccionado no tiene hermanos/as en este centro.</font></p>
+				<p align="center">Debe seleccionar la opci&oacute;n de elimniar estudiante con datos <b>TOTALES</b></p>
+				<p align="center"> Para volver atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				$sql2="DELETE FROM estudiantes WHERE ID_EST='$regEst[0]'";
+				if(mysqli_query($conexion, $sql2)){//2114
+					$output='<p><b>El estudiante seleccionado se ha borrado satisfactoriamente</b>.</p>
+					<p>Identificador del registro: <b>' . $regEst[0] . '</b></p> 
+					<p>Nombre:<b>' . $regEst[2] . '</b></p>
+					<p>Apellidos del docente:<b>' . $regEst[3] . '</b></p><br><br>
+					<p align="center">Si desea eliminar otro estudiante&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';		
+				}
+				else{
+					$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $regEst[2] . '<b>&nbsp;y apellido:&nbsp;<b>' . $regEst[3] . '</b></p>';
+					$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+				}
+			}
+		}
+		if($datos=="Totales"){
+			$sql1="SELECT id_padres FROM estudiantes WHERE id_padres='$regEst[1]'";
+			$result1=mysqli_query($conexion, $sql1);
+			$total_filas=mysqli_num_rows($result1);
+
+			if($total_filas > 1){
+				$output='<br><p align="cener"><font color="red"><b>Atenci&oacute;n:</b>&nbsp;El estudiante seleccionado tiene hermanos/as en este centro.</font></p>
+				<p align="center">Debe seleccionar la opci&oacute;n de elimniar con datos PARCIALES</p>
+				<p align="center"> Para volver atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+			}
+			else{
+				//$output='<p>'. $regEst[1] . ' y ' . $regEst[0];
+				$sql2="DELETE FROM estudiantes WHERE ID_EST='$regEst[0]'"; $result2=mysqli_query($conexion, $sql2);
+				$sql1="DELETE FROM padres WHERE ID_PADRES='$regEst[1]'"; $result1=mysqli_query($conexion, $sql1);
+				if(($result1)&&($result2)){
+					$output=$output . '<p><b>El estudiante seleccionado se ha eliminado satisfactoriamente con los datos familiares</b></p>
+					<p>Identificador del registro: <b>' . $regEst[0] . '</b></p> 
+					<p>Identificador familiar:<b>' . $regEst[1] . '</b></p>
+					<p>Nombre:<b>' . $regEst[2] . '</b></p>
+					<p>Apellidos del docente:<b>' . $regEst[3] . '</b></p><br><br>
+					<p align="center">Si desea eliminar otro estudiante&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>';
+				}
+				else{
+					$output= $output . '<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $regEst[2] . '<b>&nbsp;y apellido:&nbsp;<b>' . $regEst[3] . '</b></p>';//2148
+					$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+				}
+			}	
+		}
+	}else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar estudiante con apellidos y nombre
+		<br><font color="red">"' . $est . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Estudiante"&nbsp;<a href="http://localhost/drupal/oficina/estudiantes/baja_estudiante">pulse aqu&iacute;</a></p>'; 
+	}
+
+}
+
+mysqli_close($conexion);
+return $output;
+}	/** end baja_estudiante  **/
+
+
+function modificar_estudiante() {
+$output="";
+$conexion=bdexterna();
+$etiq_Est= array("Identificador", "Nombre", "Apellidos", "Direcci&oacute;n", "Localidad", "Provincia", "C&oacute;digo Postal", "Tel&eacute;fono", "DNI/NIF", "Fecha de Nacimiento");
+$etiq_P= array("Identificador", "Nombre", "Apellidos",  "Fecha de Nacimiento",  "DNI/NIF", "Profesi&oacute;n", "M&oacute;vil", "OBSERVACIONES");
+
+if (!$_POST){
+	$output='<form id="formModEst" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModEst">
+	<legend align="left"><SPAN style="text-align:top">Cambiar datos de un estudiante</SPAN></legend>
+        <br><br>
+	&emsp;&emsp;&nbsp;Seleccionar Nombre completo del estudiante:&nbsp;<p align="center"><select name="Est" size="6" required>';
+	
+	$sql="SELECT * FROM estudiantes";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["APELLIDOS"] . ', ' . $row["NOMBRE"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p>
+	&emsp;&emsp;&nbsp;Indicar datos a modificar:&nbsp;<p align="center"><select name="datos" size="2" required>
+	<option selected>Estudiante</option><option>Padres</option></select>
+	</p>
+	</fieldset>
+	</p>
+	<p><input type="submit" name="Siguiente" value="Siguiente" style="font-weight:bold; color:black">&emsp;
+	<input type="reset" value="Limpiar" style="font-weight:bold; color:black"></p>';
+} 
+elseif (isset($_POST["Siguiente"])){
+	$est=$_POST["Est"];
+	$tipodatos=$_POST["datos"];
+	
+	$nombre=substr($est, (strpos($est, ",")+1));
+	$long=strlen($nombre);
+	$nombre=ltrim($nombre);
+	$apellidos=substr($est, 0, -($long+1));
+	$apellidos=ltrim($apellidos);
+
+	$sqlE="SELECT * FROM estudiantes WHERE APELLIDOS='$apellidos' AND NOMBRE='$nombre'";
+	$resultE=mysqli_query($conexion, $sqlE);
+	$regEst=mysqli_fetch_array($resultE);
+	$idP=$regEst[1];
+
+	$output='<form id="formModEstS" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p><fieldset form="formModEstS">';
+
+	if ($tipodatos == "Estudiante"){
+		preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $regEst[9], $nfechaP);
+		$fechaE=$nfechaP[3] . "/" . $nfechaP[2] . "/" . $nfechaP[1]; //*2412
+
+		$output=$output . '<legend align="left"><SPAN style="text-align:top">Modificar datos del Estudiante</SPAN></legend>
+        	<br><br>
+		<p>&emsp;&emsp;&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombEst" maxlength="9" value="' . $regEst[2] . '" required>
+		&emsp;&emsp;&emsp;&emsp;Apellidos:&emsp;<input type="text" style="color:blue" name="apelEst" value="' . $regEst[3] . '"required></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Direcci&oacute;n:&emsp;<input type="text" style="color:blue" name="dirEst" value="' . $regEst[4] . '">	
+		&emsp;&emsp;&emsp;&emsp;Localidad:&emsp;<input type="text" style="color:blue" name="localEst" value="' . $regEst[5] . '"></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Provincia:&emsp;<input type="text" style="color:blue" name="provEst" value="' . $regEst[6] . '">
+		&emsp;&emsp;&emsp;&emsp;C&oacute;digo Postal:&emsp;<input type="text" style="color:blue" name="cpEst" maxlength="5" value="' . $regEst[7] . '"></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Tel&eacute;fono :&emsp;<input type="tel" style="color:blue" name="telfEst" maxlength="9" value="' . $regEst[8] . '">		
+		&emsp;&emsp;&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniEst" maxlength="9" placeholder="DNI con Letra" value="' . $regEst[10] . '"></p>	
+		<p>&emsp;&emsp;&emsp;&emsp;Fecha de Nacimiento:&emsp;<input type="date" style="color:blue" name="fechaNacEst" value="' . $fechaE . '" required maxlength="10"></p>
+		<input type="hidden" name="datos" value="0"><input type="hidden" value="' . $regEst[0] . '" name="idEst">
+		</fieldset>';	
+	}
+	else{
+		$sqlP="SELECT * FROM padres WHERE ID_PADRES='$regEst[1]'";
+		$resultP=mysqli_query($conexion, $sqlP);		
+		$regP=mysqli_fetch_array($resultP);
+		
+		preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $regP[3], $nfechaP);
+		$fechaP=$nfechaP[3] . "/" . $nfechaP[2] . "/" . $nfechaP[1];
+		preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $regP[9], $nfechaP);
+		$fechaM=$nfechaP[3] . "/" . $nfechaP[2] . "/" . $nfechaP[1];
+
+		$output=$output . '<legend align="left"><SPAN style="text-align:top">Modificar datos Familiares</SPAN></legend>
+        	<br><br>
+		<p align="center"><label><b>DATOS DEL PADRE</b></P>
+		<p>&emsp;&emsp;&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniP" maxlength="9" value="' . $regP[4] . '"required>	
+		&emsp;&emsp;&emsp;&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="text" style="color:blue" name="fechaNacP" value="' . $fechaP . '" maxlength="10"></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombP" value="' . $regP[1] . '" required>
+		&emsp;&emsp;&emsp;&emsp;&emsp;Apellidos:&emsp;<input type="text" style="color:blue" name="apelP" value="' . $regP[2] . '"required></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profP" value="' . $regP[5] . '">
+		&emsp;&emsp;&emsp;&emsp;&emsp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilP" value="' . $regP[6] . '"></p>
+		<br><p align="center"><label><b>DATOS DE LA MADRE</b></P>
+		<p>&emsp;&emsp;&emsp;&emsp;DNI/NIF:&emsp;<input type="text" style="color:blue" name="dniM" maxlength="9" value="' . $regP[10] . '"required>	
+		&emsp;&emsp;&emsp;&emsp;&emsp;Fecha Nacimiento:&emsp;<input type="text" style="color:blue" name="fechaNacM" value="' . $fechaM . '" maxlength="10"></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Nombre:&emsp;<input type="text" style="color:blue" name="nombM" value="' . $regP[7] . '" required>
+		&emsp;&emsp;&emsp;&emsp;&emsp;Apellidos:&emsp;<input type="text" style="color:blue" name="apelM" value="' . $regP[8] . '"required></p>
+		<p>&emsp;&emsp;&emsp;&emsp;Profesi&oacute;n:&emsp;<input type="text" style="color:blue" name="profM" value="' . $regP[11] . '">
+		&emsp;&emsp;&emsp;&emsp;&emsp;M&oacute;vil:&emsp;<input type="tel" style="color:blue" name="movilM" value="' . $regP[12] . '"></p>
+		<input type="hidden" name="datos" value="1"><input type="hidden" value="' . $regP[0] . '" name="idP"><input type="hidden" value="' . $est . '" name="Est">		
+		</fieldset>
+		<p>&nbsp;<b>Observaciones:</b><textarea name="observaciones" style="color:blue" rows="4" cols="103">' . $regP[13] . '</textarea></p>';//2369
+						
+	}
+	$output=$output . '</p><input type="submit" value="Grabar" name="Grabar"style="font-weight:bold; color:black"></form>';
+}elseif (isset($_POST["Grabar"])){
+	if ($_POST["datos"]=="0"){
+		$reg[0]=$_POST["idEst"];
+		$reg[1]=$_POST["nombEst"];
+		$reg[2]=$_POST["apelEst"];
+		$reg[3]=$_POST["dirEst"];
+		$reg[4]=$_POST["localEst"];
+		$reg[5]=$_POST["provEst"];
+		$reg[6]=$_POST["cpEst"];
+		$reg[7]=$_POST["telfEst"];
+		$reg[8]=$_POST["dniEst"];
+		$reg[9]=$_POST["fechaNacEst"];
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $reg[9], $nfecha);
+		$fecha=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+
+		$sql="UPDATE estudiantes SET NOMBRE='$reg[1]', APELLIDOS='$reg[2]', DIRECCION='$reg[3]', LOCALIDAD='$reg[4]', PROVINCIA='$reg[5]', CPOSTAL='$reg[6]', TELF='$reg[7]', FECHA_NACIMIENTO='$fecha', DNI='$reg[8]' WHERE ID_EST='$reg[0]'";
+		if(mysqli_query($conexion, $sql)){//2388
+			$output= $output . '<p><b>El estudiante seleccionado se ha actualizado satisfactoriamente.</b></p>
+			<p>Los datos grabados son:</p>';
+			for($i=1;$i<10;$i++){
+				if ($reg[$i] <> ""){
+					$output=$output . '<p><em>' . $etiq_Est[$i] . ':</em>&nbsp;' . '<b>' . $reg[$i] . '</b></p>';//2393
+				}
+
+			}
+			$output=$output . '<br><br>
+			<p align="center">Si desea modificar otro estudiante <a href="http://localhost/drupal/oficina/estudiantes/modificar_estudiante">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output='<p><b>Error al actualizar el registro de estudiante<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+	else{
+		$reg[0]=$_POST["idP"];
+		$reg[1]=$_POST["nombP"];
+		$reg[2]=$_POST["apelP"];
+		$reg[3]=$_POST["fechaNacP"];
+		$reg[4]=$_POST["dniP"];
+		$reg[5]=$_POST["profP"];
+		$reg[6]=$_POST["movilP"];
+		$reg[7]=$_POST["nombM"];
+		$reg[8]=$_POST["apelM"];
+		$reg[9]=$_POST["fechaNacM"];
+		$reg[10]=$_POST["dniM"];
+		$reg[11]=$_POST["profM"];
+		$reg[12]=$_POST["movilM"];
+		$reg[13]=$_POST["observaciones"];
+		
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $reg[3], $nfecha);
+		$fechaP=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+		preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $reg[9], $nfecha);
+		$fechaM=$nfecha[3] . "-" . $nfecha[2] . "-" . $nfecha[1];
+
+		$est=$_POST["Est"];
+$output= $output . $reg[0] . ',' . $est;
+	      //$sql="UPDATE padres SET NOMB_PADRE='$padres[0]', APEL_PADRE='$padres[1]', F_NAC_PADRE='$fechaP', DNI_P='$padres[3]', PROF_PADRE='$padres[4]', MOVIL_PADRE='$padres[5]', NOMB_MADRE= '$padres[6]', APEL_MADRE='$padres[7]', F_NAC_MADRE='$fechaM', DNI_M='$padres[9]', PROF_MADRE='$padres[10]', MOVIL_MADRE='$padres[11]', OBSERVACIONES='$padres[12]' WHERE ID_PADRES='$id_P'";
+		$sql="UPDATE padres SET NOMB_PADRE='$reg[1]', APEL_PADRE='$reg[2]', F_NAC_PADRE='$fechaP', DNI_P='$reg[4]', PROF_PADRE='$reg[5]', MOVIL_PADRE='$reg[6]', NOMB_MADRE='$reg[7]', APEL_MADRE='$reg[8]', F_NAC_MADRE='$fechaM', DNI_M='$reg[10]', PROF_MADRE='$reg[11]', MOVIL_MADRE='$reg[12]', OBSERVACIONES='$reg[13]' WHERE ID_PADRES='$reg[0]'";
+		if(mysqli_query($conexion, $sql)){  //2423
+			$output= $output . '<p><b>Los datos familiares del estudiante seleccionado&nbsp;"' . $est . '"&nbsp;se han actualizado satisfactoriamente.</b></p>
+			<p><b>DATOS DEL PADRE:</b></p>';
+			for($i=1;$i<7;$i++){
+				if($reg[$i]<>""){
+					$output=$output . '<p><em>' . $etiq_P[$i] . ':</em>&nbsp;' . '<b>' . $reg[$i] . '</b></p>';
+				}
+			}
+			$output= $output . '<p><b>DATOS DE LA MADRE:</b></p>';
+			for($i=7;$i<13;$i++){
+				if($reg[$i]<>""){
+					$output=$output . '<p><em>' . $etiq_P[$i-6] . ':</em>&nbsp;' . '<b>' . $reg[$i] . '</b></p>';
+				}
+			}
+			if($reg[13]<>""){
+				$output= $output . '<p><b>' . $etiq_P[7] . ':</b>&nbsp;' . '<br>' . $reg[$i] . '</p>';
+			}
+			
+			$output= $output . '<br><br>
+			<p align="center">Si desea modificar otro estudiante <a href="http://localhost/drupal/oficina/estudiantes/modificar_estudiante">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output=$output .'<p><b>Error al actualizar el registro padres del estudiante<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+	
+} 
+
+mysqli_close($conexion);
+
+return $output;
+}	/** end modificar_estudiante  **/
+
+
+
+/**********
+		************************** Materias *************************
+***********/
+
+function listar_materias(){
+$output="";
+$tamano_pagina="5";
+
+if(array_key_exists('pagina', $_GET)){
+	$pagina=$_GET["pagina"];
+}
+else{
+	$pagina=1;
+}
+
+$conexion=bdexterna();
+
+$sql="SELECT * FROM materias";
+$result=mysqli_query($conexion, $sql);
+$total_filas=mysqli_num_rows($result);
+$total_paginas=ceil($total_filas / $tamano_pagina);
+
+$sql="SELECT * FROM materias LIMIT " . (($pagina-1) * $tamano_pagina) . "," . $tamano_pagina;
+$result=mysqli_query($conexion, $sql);
+$output='<p align="center"><b><font size="4">Listado de las Materias que se imparten en el centro</font></b></p>';
+$output=$output . '<table border="2"><tr><th><font size="2">Identificador</font></th><th><font size="3">Nombre Materia</font></th></tr>';
+if($total_filas > 0){
+	while ($row=mysqli_fetch_assoc($result)){
+		$output=$output . '<tr><td><font color="blue" size="2">'. $row["ID_MATERIA"] . '</font></td><td><font color="blue" size="2">' . $row["NOMBRE"] . '</font></td></tr>';
+	}
+	$output=$output . '</table><br>';
+}
+
+mysqli_close($conexion);
+
+if ($total_paginas > 1){
+	for ($i=1;$i<=$total_paginas;$i++){
+		if($pagina == $i){
+			$output=$output . 'P&aacute;gina ' . $pagina . "&nbsp;&nbsp;";
+		}
+		else{
+			$output=$output . '<a href="http://localhost/drupal/oficina/materias/listar_materias?pagina=' . $i . '">P&aacute;gina ' . $i . '</a>&nbsp;&nbsp;';
+		}
+
+	}
+}
+
+return $output;
+
+}   /** end listar_materias **/
+
+
+function alta_materia() {
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formAltaMateria" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formAltaMateria">
+	<legend align="left"><SPAN style="text-align:top">Introducir una materia nueva</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre:&nbsp;<input type="text" name="nombMateria" required autofocus></SPAN></p>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar un Departamento:</p><p align="center"><select name="nombDpto" size="6" required>';
+	
+	$sql="SELECT nombre FROM departamentos";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+
+	 $output= $output . '</select></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Agregar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+}elseif ($_POST["nombMateria"] == ""){
+		$output='<br><b>Atenci&oacute;n</b><br><br><p>No puede dar de alta una Materia sin nombre</p><p>Para volver hacia atr&aacute;s&nbsp;<a href="http://localhost/drupal/oficina/materias/alta_materia">pulse aqu&iacute;</a></p>'; 
+}
+else{
+	$nombre=$_POST["nombMateria"];
+	$nom_dpto=$_POST["nombDpto"];
+	
+	$sql="SELECT ID_DPTO FROM departamentos WHERE NOMBRE='$nom_dpto'";	
+	$result=mysqli_query($conexion, $sql);
+	$id_dpto=mysqli_fetch_array($result);
+	$sql="INSERT INTO materias (ID_MATERIA, ID_DPTO, NOMBRE) VALUES (NULL, '$id_dpto[0]', '$nombre')";
+		
+	if(mysqli_query($conexion, $sql)){
+		$ant_id=mysqli_insert_id($conexion);
+		$output= '<p><b>Nueva materia registrada satisfactoriamente</b>.</p><p>Identificador de nuevo registro:&nbsp;<b>' . $ant_id . '</b></p> 
+		<p>Nombre del nuevo registro:&nbsp;<b>' . $nombre . '</b></p>
+		<p>Identificador de departamento&nbsp;<b>' . $id_dpto[0] . '</b></p>
+		<p>Nombre del departamento:&nbsp;<b>' . $nom_dpto . '</b></p><br><br>
+		<p align="center">Si desea agregar otra materia&nbsp;<a href="http://localhost/drupal/oficina/materias/alta_materia">pulse aqu&iacute;</a></p>'; 
+	}
+	
+	
+}
+	
+mysqli_close($conexion);	
+return $output;
+
+}   /** end alta_materia **/
+
+function baja_materia() {
+$output="";
+$conexion=bdexterna();	
+
+if (!$_POST){
+	$output='<form id="formBajaMateria" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formBajaMateria">
+	<legend align="left"><SPAN style="text-align:top">Eliminar una materia</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar una Materia:&nbsp;<p align="center"><select name="nombMateria" size="8" required>';
+	
+	$sql="SELECT nombre FROM materias";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</p></select></fieldset>
+	</p>
+	<p><input type="submit" name="Eliminar" value="Eliminar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+elseif(isset($_POST["Eliminar"])){	
+	$output='<form id="formConfirmarMat" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formConfirmarMat">
+	<legend align="left"><SPAN style="text-align:top">Confirmar Baja</SPAN></legend>
+        <br><br><p align="center"> Seguro que desea dar de baja la materia con el nombre<b>&nbsp;"' . $_POST["nombMateria"] . '"</b></p>
+	
+	<p align="center"><input type="submit" value="Aceptar" name="Aceptar" style="font-weight:bold; color:black">&emsp;
+	<input type="submit" name="Cancelar" value="Cancelar" style="font-weight:bold; color:black">
+	<input type="hidden" name="materia" value="' . $_POST["nombMateria"] . '">
+	</p></fieldset></p></form>';
+}
+else{
+	$nombre=$_POST["materia"];
+	if(isset($_POST["Aceptar"])){
+		//mysqli_select_db($conexion, "colegio");
+		$sql="SELECT id_materia, nombre FROM materias WHERE nombre='$nombre'";
+		$row=mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+		//$sql="DELETE FROM materias WHERE NOMBRE='$nombre'";
+		//if(mysqli_query($conexion, $sql)){
+			$output= '<p><b>La materia seleccionada se ha borrado satisfactoriamente</b>.</p>
+			<p>Identificador del registro: <b>' . $row["id_materia"] . '</b></p> 
+			<p>Nombre del registro: <b>' . $row["nombre"] . '</b></p><br><br>';
+			$output=$output . '<p align="center">Si desea eliminar otra materia&nbsp;<a href="http://localhost/drupal/oficina/materias/baja_materia">pulse aqu&iacute;</a></p>';		
+		//}
+		//else{
+		//	$output='<p><b>Error al eliminar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+		//	$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		//}
+	}else{
+		$output='<br><br><b><p align="center">Operaci&oacute;n de eliminar materia con el nombre<br>
+		<font color="red">"' . $nombre . '"</font><br>ha sido cancelada</b>
+		<br>
+		<p align="center">Si desea volver al apartado "Baja Materia"&nbsp;<a href="http://localhost/drupal/oficina/materias/baja_materia">pulse aqu&iacute;</a></p>'; 
+	}
+}
+mysqli_close($conexion);
+return $output;
+
+}   /** end baja_materia **/
+
+
+function modificar_materia() {
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+	$output='<form id="formModMateria" action="" method="post" accept-charset="UTF-8" size="100%">
+	<p>
+	<fieldset form="formModMateria">
+	<legend align="left"><SPAN style="text-align:top">Cambiar nombre de una materia</SPAN></legend>
+        <br><br>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar una Materia:&nbsp;<p align="center"><select name="nombMateria" size="5" required>';
+	
+	$sql="SELECT nombre FROM materias";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+			//$id=$row["id_dpto"];
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</p></select></p>
+	<br><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicar el nuevo nombre de materia:&nbsp; <input type="text" style="color:blue" name="nuevo" required></p>
+	</fieldset>
+	</p>
+	<p><input type="submit" value="Grabar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpiar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+} 
+else{
+	$nombre=$_POST["nombMateria"];
+	$nombnuevo=$_POST["nuevo"];
+	mysqli_select_db($conexion, "colegio");
+	$sql="SELECT ID_MATERIA FROM materias WHERE NOMBRE='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$id=mysqli_fetch_array($result);
+	//$num=$id[0];
+	if ($nombnuevo == ""){
+		$output='<br><br><font color="red"><b>Atenci&oacute;n</b></font><br><br><p>No ha introducido ning&uacute;n dato para actualizar el registro seleccionado:&nbsp;<b>' . $nombre . '</b></p>&nbsp;';
+		$output=$output . '<br><p align="center">Para volver a intentarlo&nbsp;<a href="http://localhost/drupal/oficina/materias/modificar_materia">pulse aqu&iacute;</a></p>';
+	} 
+	else{
+		$sql="UPDATE materias SET NOMBRE='$nombnuevo' WHERE ID_MATERIA= '$id[0]'";
+		if(mysqli_query($conexion, $sql)){
+			$output= '<p><b>La materia seleccionada se ha actualizado satisfactoriamente.</b></p> 
+			<p>Nombre anterior del registro: <b>' . $_POST["nombMateria"] . '</b></p><p>Se ha actualizado por el nombre: <b>' . $_POST["nuevo"] . '</b></p>
+			<p>Identificador de registro: <b>' . $id[0] . '</b></p><br>';
+			$output=$output . '<p align="center">Si desea modificar otra materia&nbsp;<a href="http://localhost/drupal/oficina/materias/modificar_materia">pulse aqu&iacute;</a></p>'; 
+		}
+		else{
+			$output='<p><b>Error al actualizar el registro con el nombre:&nbsp;' . $nombre . '<b></p>';
+			$output=$output . '<p>'. mysqli_error($conexion) . '</p>';
+		}
+	}
+} 
+mysqli_close($conexion);
+return $output;
+
+}  /** end modificar_materia **/
+
+/****************
+		***Registros (matrículas)***
+					***********************/
+
+/*****Alta Registro **********/
+
+
+function alta_registro(){
+$output="";
+
+$conexion=bdexterna();
+
+if (!$_POST){
+$output='<form id="formAltaRegistro" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formAltaRegistro">
+	<legend align="left"><SPAN style="text-align:top">Crear una nueva matr&iacute;cula de estudiante</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buscar un estudiante de la lista:&nbsp;</SPAN></p>
+	<p align="center"><select name="Estudiante" size="8" required autofocus>';
+	
+	$sql="SELECT nombre, apellidos FROM estudiantes";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["apellidos"] . ', ' . $row["nombre"] . '</option>';//284
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p>
+	<p align="center">Primera Matr&iacute;cula:&nbsp;&nbsp;<input type="radio" value="1" name="primat" required>&nbsp;&nbsp;S&iacute;
+	&nbsp;&nbsp;<input type="radio" value="0" name="primat" required checked>&nbsp;&nbsp;No&emsp;&emsp;&emsp;&emsp;
+	Comienza Segundo Ciclo Infantil:&nbsp;&nbsp;<input type="radio" value="1" name="SegCicloI" required>&nbsp;&nbsp;S&iacute;
+	&nbsp;&nbsp;<input type="radio" value="0" name="SegCicloI" required checked>&nbsp;&nbsp;No</p>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar Unidad:&nbsp;</SPAN></p>
+	<p align="center"><select name="Unidad" size="4" required>';
+	
+	$sql="SELECT nombre FROM grupos_a";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';//2845
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$output= $output . '</select></p>
+	<p align="center">A&ntilde;o Matr&iacute;cula:&nbsp;&nbsp;<input type="text" style="color:blue" name="anno" required>
+	&nbsp;&nbsp;&nbsp;&nbsp;Fecha Matr&iacute;cula:&nbsp;&nbsp;<input type="date" style="color:blue" name="fecha" required maxlength="10"></p>
+	<p>&emsp;&emsp;&emsp;&emsp;Expediente:&nbsp;&nbsp;<input type="text" style="color:blue" name="exp" required>
+	&emsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignaturas pendientes:&ensp;<input type="radio" name="repetidor" value="0" checked>&nbsp;&nbsp;No
+	&emsp;<input type="radio" name="repetidor" value="1">&nbsp;&nbsp;S&iacute;
+	</p></fieldset></p>
+	<p><input type="submit" value="Siguiente" name="Siguiente" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="reset" value="Limpiar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="submit" value="Grabar y Finalizar" name="Grabar" style="font-weight:bold; color:black">  
+	</p>
+	</form>';
+}
+elseif (isset($_POST["Siguiente"]) AND ($_POST["repetidor"]=='1')){
+	//$Est=$_POST["Estudiante"];$Unidad=$_POST["Unidad"];$ano=$_POST["anno"];$Fecha=$_POST["fecha"];$Exp=$_POST["exp"];$rep=$_POST["repetidor"];
+	$output='<form id="formAltaRegistroRep" action="" method="post" accept-charset="UTF-8">
+	<p>
+	<fieldset form="formAltaRegistroRep">
+	<legend align="left"><SPAN style="text-align:top">Datos de Asignaturas Pendientes</SPAN></legend>
+        <br><br>
+	<p><SPAN style="text-align:top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seleccionar Unidad:&nbsp;</SPAN></p>
+	<p align="center"><select name="UnidadRep" size="4" required>';
+	$sql="SELECT nombre FROM grupos_r";
+	$result=mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($result) > 0){
+		while($row=mysqli_fetch_assoc($result)){
+			$output= $output . '<option>' . $row["nombre"] . '</option>';
+		}
+	}
+	else{
+		  $output= $output . '<option></option>';
+	}
+	$nombEst=substr($_POST["Estudiante"], (strpos($_POST["Estudiante"], ",")+1));//3127
+	$long=strlen($nombEst);$nombEst=ltrim($nombEst);
+	$apelEst=substr($_POST["Estudiante"], 0, -($long+1));
+	$apelEst=ltrim($apelEst);
+	$sql="SELECT id_est FROM estudiantes WHERE nombre='$nombEst' AND apellidos='$apelEst'";
+	$result=mysqli_query($conexion, $sql);
+	$idEst=mysqli_fetch_assoc($result);
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $_POST["fecha"], $fechaM);//3134
+	$fechaMat=$fechaM[3] . "-" . $fechaM[2] . "-" . $fechaM[1];
+	$output= $output . '</select></p>
+	<p align="center"><SPAN style="text-align:top">Indicar n&uacute;mero de Asignaturas Pendientes (m&aacute;ximo 3):&nbsp;&nbsp;</SPAN>
+	<input type="text" name="AsigP" style="color:blue" required size="1"></p>
+	</fieldset></p>
+	<p><input type="submit" value="Grabar" name="GrabarR" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="reset" value="Limpiar" style="font-weight:bold; color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" onclick="history.back()" value="Volver Atr&aacute;s" name="Volver Atras" style="font-weight:bold; color:black">
+	<input type="hidden" name="Est" value="' . $_POST["Estudiante"] . '"><input type="hidden" name="UnidadA" value="' . $_POST["Unidad"] .'">
+	<input type="hidden" name="Ano" value="' . $_POST["anno"] . '"><input type="hidden" name="FechaM" value="' . $fechaMat .'">
+	<input type="hidden" name="Exp" value="' . $_POST["exp"] . '"><input type="hidden" name="Rep" value="' . $_POST["repetidor"] .'">
+	<input type="hidden" name="SegcicloI" value="' . $_POST["SegCicloI"] . '"><input type="hidden" name="Pmat" value="' . $_POST["primat"] . '">
+	<input type="hidden" name="IdEst" value="' . $idEst["id_est"] . '">
+	</p></form>' . $_POST["fecha"] . ' ' . $nombEst . ' ' . $apelEst . ' ' . $fechaMat . ' ' . $_POST["primat"];//3136
+}
+elseif (isset($_POST["GrabarR"])){
+	$nombre=$_POST["UnidadA"];
+	$sql="SELECT id_gruposa FROM grupos_a WHERE nombre='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$idGA=mysqli_fetch_assoc($result);//3154
+	$nombre=$_POST["UnidadRep"];
+	$sql="SELECT id_grupor FROM grupos_r WHERE nombre='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$idGR=mysqli_fetch_assoc($result);
+	//Grabar Matriculas
+	$id_ga=$idGA["id_gruposa"];$id_gr=$idGR["id_grupor"];$rep=$_POST["Rep"];
+	$id=$_POST["IdEst"];$ano=$_POST["Ano"];$fecha=$_POST["FechaM"];$asigP=$_POST["AsigP"];$exp=$_POST["Exp"];$pmat=$_POST["Pmat"];$scicloI=$_POST["SegcicloI"];
+	$sql="INSERT INTO matriculas (ID_MATRICULAS, ID_EST, ID_GRUPOSA, AÑO, ID_GRUPOSR, FECHA, REPETIDOR, NUM_ASIG_P, EXP, PRIMERA_MAT, MAS_TRES_AÑOS) VALUES 
+	(NULL, '$id', '$id_ga', '$ano', '$id_gr', '$fecha', '$rep', '$asigP', '$exp', '$pmat', '$scicloI')";//3162
+	preg_match("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})/", $_POST["FechaM"], $fechaM);
+	$fechaMat=$fechaM[3] . "/" . $fechaM[2] . "/" . $fechaM[1];
+	$result=mysqli_query($conexion, $sql);
+	if($result){ //3166
+		$idMat=mysqli_insert_id($conexion); 
+		$output='<p><b>Matr&iacute;cula registrada satisfactoriamente</b></p>
+		<p><em>Identificador de matr&iacute;cula de estudiante:</em>&nbsp;<b>' . $idMat . '</b></p>
+		<p><em>Estudiante:</em>&nbsp;<b>' . $_POST["Est"] . '</b></p>
+		<p><em>A&ntilde;o Curso:</em>&nbsp;<b>' . $ano . '</b></p>
+		<p><em>Expediente:</em>&nbsp;<b>' . $exp . '</b></p>
+		<p><em>Fecha Matr&iacute;cula:</em>&nbsp;<b>' . $fechaMat . '</b></p>
+		<p><em>Unidad:</em>&nbsp;<b>' . $_POST["UnidadA"] . '</b></p>
+		<p><em>Unidad con Asignaturas Pendientes:</em>&nbsp;<b>' . $_POST["UnidadRep"] . '</b></p>
+		<p><em>N&uacute;mero Asignaturas Pendientes:</em>&nbsp;<b>' . $asigP . '</b></p>';
+		if ($_POST["Pmat"]=='1'){
+			$output = $output . '<form id="formAltaRegistroRepH" action="" method="post" accept-charset="UTF-8">
+			<p>
+			<fieldset form="formAltaRegistroRepH">
+			<legend align="left"><SPAN style="text-align:top">Estudiante desplazado de otro centro</SPAN></legend>
+       			<br><br>
+			<b><em><p align="center">Para registrar matr&iacute;cula del nuevo estudiante, debe agregar los</p>
+			<p align="center">expedientes anteriores al curso que iniciar&aacute; en este centro.</p></em></b>
+			<em><p align="center">Para ir al Hist&oacute;rico, hacer clic &nbsp;<a href="http://localhost/drupal/oficina/historial_de_expedientes/alta_expediente">AQU&Iacute;.</a>&nbsp;</p></em>
+			</fieldset></p>
+			</form>';
+		}else{
+			$output=$output . '<p align="center"><b>Para realizar otra matr&iacute;cula, <a href="http://localhost/drupal/oficina/registro_de_estudiantes/alta_registro">Pulse aqu&iacute;</a></b></p>';
+		}
+	}
+	else{
+		$output='<br><br><p><font color="red"><b>Atenci&oacute;n</b></font></p>
+		<p>Error al dar de alta los datos de la nueva matr&iacute;cula para el estudiante ' . $_POST["Est"] . '</p>';
+		$output=$output . '<p>' . mysqli_error($conexion) . '</p>';
+	}	
+}
+
+elseif ((isset($_POST["Grabar"]) AND ($_POST["repetidor"]=='0'))){
+	$nombEst=substr($_POST["Estudiante"], (strpos($_POST["Estudiante"], ",")+1));
+	$long=strlen($nombEst);$nombEst=ltrim($nombEst);
+	$apelEst=substr($_POST["Estudiante"], 0, -($long+1));
+	$apelEst=ltrim($apelEst);
+	$sql="SELECT id_est FROM estudiantes WHERE nombre='$nombEst' AND apellidos='$apelEst'";
+	$result=mysqli_query($conexion, $sql);
+	$idEst=mysqli_fetch_assoc($result);
+	$nombre=$_POST["Unidad"];
+	$sql="SELECT id_gruposa FROM grupos_a WHERE nombre='$nombre'";
+	$result=mysqli_query($conexion, $sql);
+	$idGA=mysqli_fetch_assoc($result);//3148
+	preg_match("/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/", $_POST["fecha"], $fechaM);
+	$fechaMat=$fechaM[3] . "-" . $fechaM[2] . "-" . $fechaM[1];
+	//Grabar Matriculas
+	$id_ga=$idGA["id_gruposa"];$rep=$_POST["repetidor"];$id=$idEst["id_est"];$idGR=0;
+	$ano=$_POST["anno"];$exp=$_POST["exp"];$pmat=$_POST["primat"];$scicloI=$_POST["SegCicloI"];//3246
+	$sql="INSERT INTO matriculas (ID_MATRICULAS, ID_EST, ID_GRUPOSA, AÑO, ID_GRUPOSR, FECHA, REPETIDOR, EXP, PRIMERA_MAT, MAS_TRES_AÑOS) VALUES 
+	(NULL, '$id', '$id_ga', '$ano', 1, '$fechaMat', '$rep', '$exp', '$pmat', '$scicloI')";//3248
+	$result=mysqli_query($conexion, $sql);
+	if($result){ 
+		$idMat=mysqli_insert_id($conexion); 
+		$output='<p><b>Matr&iacute;cula registrada satisfactoriamente</b></p>
+		<p><em>Identificador de matr&iacute;cula de estudiante:</em>&nbsp;<b>' . $idMat . '</b></p>
+		<p><em>Estudiante:</em>&nbsp;<b>' . $_POST["Estudiante"] . '</b></p>
+		<p><em>A&ntilde;o Curso:</em>&nbsp;<b>' . $ano . '</b></p>
+		<p><em>Expediente:</em>&nbsp;<b>' . $exp . '</b></p>
+		<p><em>Fecha Matr&iacute;cula:</em>&nbsp;<b>' . $_POST["fecha"] . '</b></p>
+		<p><em>Unidad:</em>&nbsp;<b>' . $_POST["Unidad"] . '</b></p><br>
+		<p align="center"><b>Para realizar otra matr&iacute;cula, <a href="http://localhost/drupal/oficina/registro_de_estudiantes/alta_registro">Pulse aqu&iacute;</a></b></p>';//3261
+	}
+	else{
+		$output='<br><br><p><font color="red"><b>Atenci&oacute;n</b></font></p>
+		<p>Error al dar de alta los datos de la nueva matr&iacute;cula para el estudiante ' . $_POST["Estudiante"] . '</p>';//3265
+		$output=$output . '<p>' . mysqli_error($conexion) . '</p>';
+	}	
+	//$output=$_POST["Estudiante"] . ' ' . $_POST["Unidad"]. ' Finalizar';
+}	
+else{
+	$output="Error";
+}
+mysqli_close($conexion);
+return $output;
+} /**** alta_registro ****/
+
+/****************
+		***Historial de Expedientes***
+					    ***********************/
+
+function listar_expedientes() {
+$output="hola";
+return $output;
+}
+
+function alta_expediente() {
+
+$output='<input type="button" onclick="history.back()" value="Volver Atr&aacute;s" name="Volver Atras" style="font-weight:bold; color:black"></p>
+<p align="center"><b>Para realizar otra matr&iacute;cula, <a href="http://localhost/drupal/oficina/registro_de_estudiantes/alta_registro">Pulse aqu&iacute;</a></b></p>';
+return $output;
+}
+
+
+function baja_expediente(){
+$output="hola";
+return $output;
+
+
+}
+
+function modificar_expediente(){
+$output="hola";
+return $output;
+
+}
